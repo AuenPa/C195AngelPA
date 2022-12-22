@@ -28,7 +28,8 @@ public class DBAppointments {
                 String type = rs.getString("Type");
                 String start = rs.getString("Start");
                 String end = rs.getString("End");
-                Appointment a = new Appointment(appointmentId, title, description, location, type, start, end);
+                int assocCustomerId = rs.getInt("Customer_ID");
+                Appointment a = new Appointment(appointmentId, title, description, location, type, start, end, assocCustomerId);
                 alist.add(a);
             }
         } catch (SQLException throwables) {

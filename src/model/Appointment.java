@@ -9,8 +9,9 @@ public class Appointment {
     private String type;
     private String startTime;
     private String endTime;
+    private int assocCustomerId;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type, String startTime, String endTime) {
+    public Appointment(int appointmentId, String title, String description, String location, String type, String startTime, String endTime, int assocCustomerId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -18,6 +19,15 @@ public class Appointment {
         this.type = type;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.assocCustomerId = assocCustomerId;
+    }
+
+    public int getAssocCustomerId() {
+        return assocCustomerId;
+    }
+
+    public void setAssocCustomerId(int assocCustomerId) {
+        this.assocCustomerId = assocCustomerId;
     }
 
     public int getAppointmentId() {

@@ -15,12 +15,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Customer;
+import util.DBAppointments;
 import util.DBCustomers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -48,10 +51,13 @@ public class CustomerController implements Initializable {
     @FXML
     private TableColumn<Customer, Integer> tableColumn6;
 
+    private Customer SC;
+
     @FXML
     public void deleteSelectedCustomer(ActionEvent event) {
+
         try {
-            Customer SC = customerTable.getSelectionModel().getSelectedItem();
+            SC = customerTable.getSelectionModel().getSelectedItem();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected customer, are you sure?");
 
@@ -62,6 +68,22 @@ public class CustomerController implements Initializable {
             }
         }
         catch (SQLException | NullPointerException e) {
+            //deletelater System.out.println("Delete associated appointment");
+            for(Appointment a : DBAppointments.getAllAppointments()) {
+                //had to add SC != null before becuase it doesn't go to the next and final if statement (i.e., nothing selected)
+                if(SC != null && SC.getCustomerId() == a.getAssocCustomerId()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Delete associated appointment first");
+                    alert.setTitle("Error");
+                    alert.setContentText("Can't delete");
+                    alert.showAndWait();
+                }
+            }
+            if(SC == null) {
+                Alert alert1 = new Alert(Alert.AlertType.ERROR, "Nothing selected");
+                alert1.setTitle("Error");
+                alert1.setContentText("Nothing selected");
+                alert1.showAndWait();
+            }
             e.printStackTrace();
         }
     }
