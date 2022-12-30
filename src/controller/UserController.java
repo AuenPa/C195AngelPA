@@ -30,24 +30,26 @@ public class UserController implements Initializable {
     public void loginToAppointments(ActionEvent event) throws IOException {
 
         ObservableList<User> userList = DBUsers.getAllUsers();
+        int counter = 0;
         for(User u : userList) {
             if(u.getUserName().equals(userName.getText())
             && u.getPassword().equals(passWord.getText()) ) {
                 System.out.println("Successful login!");
 
-                Parent root = FXMLLoader.load(getClass().getResource("../view/CustomerApplicationMenu.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../view/AppointmentsMenu.fxml"));
                 Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root, 720, 540);
+                Scene scene = new Scene(root, 871, 558);
                 stage.setTitle("Customer/Appointment Form");
                 stage.setScene(scene);
                 stage.show();
-                break;
-            }
-            else {
-                System.out.println("Wrong username or password");
-
+                counter++;
             }
         }
+        if(counter == 2) {
+            System.out.println("Wrong username or password");
+            //counter = 0;
+        }
+        counter = 0;
 
     }
 

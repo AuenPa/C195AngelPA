@@ -51,6 +51,9 @@ public class CustomerController implements Initializable {
     @FXML
     private TableColumn<Customer, Integer> tableColumn6;
 
+    @FXML
+    private TableColumn<Customer, String> divisionName;
+
     private Customer SC;
 
     @FXML
@@ -65,12 +68,14 @@ public class CustomerController implements Initializable {
 
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 DBCustomers.deleteCustomer(SC.getCustomerId());
+                Customer.deleteCustomerCM(SC);
             }
+
         }
+
         catch (SQLException | NullPointerException e) {
-            //deletelater System.out.println("Delete associated appointment");
             for(Appointment a : DBAppointments.getAllAppointments()) {
-                //had to add SC != null before becuase it doesn't go to the next and final if statement (i.e., nothing selected)
+                //had to add SC != null before because it doesn't go to the next and final if statement (i.e., nothing selected)
                 if(SC != null && SC.getCustomerId() == a.getAssocCustomerId()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Delete associated appointment first");
                     alert.setTitle("Error");
@@ -85,11 +90,17 @@ public class CustomerController implements Initializable {
                 alert1.showAndWait();
             }
             e.printStackTrace();
+            //System.out.println(e.getMessage());
         }
     }
 
     @FXML
-    public void toAddCustomerScreen(ActionEvent event) {
+    public void toAddCustomerScreen(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 720, 540);stage.setTitle("From customer menu to add customer");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -108,8 +119,25 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    public void logout(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 743, 526);
+            stage.setTitle("Logged out");
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //customerTable.setItems(Customer.getAllCustomersCM());
         customerTable.setItems(DBCustomers.getAllCustomers());
 
         tableColumn1.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -118,6 +146,7 @@ public class CustomerController implements Initializable {
         tableColumn4.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         tableColumn5.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         tableColumn6.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+        divisionName.setCellValueFactory(new PropertyValueFactory<>("division"));
 
     }
 }

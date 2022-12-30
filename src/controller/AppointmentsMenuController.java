@@ -61,18 +61,20 @@ public class AppointmentsMenuController implements Initializable {
 
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 DBAppointments.deleteAppointment(SA.getAppointmentId());
+                appointmentTable.setItems(DBAppointments.getAllAppointments());
             }
         }
         catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
+        //appointmentTable.setItems(DBAppointments.getAllAppointments());
     }
 
     @FXML
     public void goToCustomerTable(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 720, 540);
+        Scene scene = new Scene(root, 890, 540);
         stage.setTitle("From appointments to customer");
         stage.setScene(scene);
         stage.show();

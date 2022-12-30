@@ -1,5 +1,6 @@
 package main;
 
+import util.DBCustomers;
 import util.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Login Menu");
         primaryStage.setScene(new Scene(root, 743, 526));
         primaryStage.show();
     }
