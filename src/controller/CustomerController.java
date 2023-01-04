@@ -68,7 +68,8 @@ public class CustomerController implements Initializable {
 
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 DBCustomers.deleteCustomer(SC.getCustomerId());
-                Customer.deleteCustomerCM(SC);
+                //Customer.deleteCustomerCM(SC);
+                customerTable.setItems(DBCustomers.getAllCustomers());
             }
 
         }

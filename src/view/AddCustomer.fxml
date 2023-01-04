@@ -21,9 +21,9 @@
       <TextField fx:id="address" layoutX="197.0" layoutY="155.0" />
       <TextField fx:id="postalCode" layoutX="197.0" layoutY="194.0" />
       <TextField fx:id="phoneNumber" layoutX="197.0" layoutY="234.0" />
-      <ComboBox layoutX="197.0" layoutY="275.0" prefWidth="150.0" />
+      <ComboBox fx:id="countryComboBox" layoutX="197.0" layoutY="275.0" onAction="#onComboSelectCountry" prefWidth="150.0" />
       <Label layoutX="395.0" layoutY="279.0" text="Division" />
-      <ComboBox layoutX="461.0" layoutY="275.0" prefWidth="150.0" />
+      <ComboBox fx:id="stateComboBox" layoutX="461.0" layoutY="275.0" onAction="#onComboSelectState" prefWidth="150.0" />
       <Label layoutX="314.0" layoutY="31.0" text="Add Customer" />
       <TextField fx:id="tempDivisionID" layoutX="462.0" layoutY="317.0" />
    </children>

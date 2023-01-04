@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Country;
 import model.Customer;
+import model.State;
+import util.DBCountry;
 import util.DBCustomers;
+import util.DBState;
 
 
 import java.io.IOException;
@@ -38,6 +45,14 @@ public class AddCustomerController implements Initializable {
     private TextField tempDivisionID;
 
     @FXML
+    private ComboBox<State> stateComboBox;
+
+    @FXML
+    private ComboBox<Country> countryComboBox;
+
+    private ObservableList<State> stateFiltered = FXCollections.observableArrayList();
+
+    @FXML
     public void cancelAddCustomer(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -48,10 +63,10 @@ public class AddCustomerController implements Initializable {
     }
 
     @FXML
-    public void saveAddCustomer(ActionEvent event) {
+    public void saveAddCustomer(ActionEvent event) throws IOException {
         DBCustomers.addCustomer(customerName.getText(), address.getText(), postalCode.getText(), phoneNumber.getText(), Integer.parseInt(tempDivisionID.getText()));
         //Customer.addCustomerCM();
-/*
+
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 890, 540);
@@ -59,11 +74,53 @@ public class AddCustomerController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
- */
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        ObservableList<Country> countries = DBCountry.getAllCountries();
+        countryComboBox.setItems(countries);
+/*
+        ObservableList<State> states = DBState.getAllStates();
+        stateComboBox.setItems(states);
+
+ */
     }
+
+    @FXML
+    public void onComboSelectCountry(ActionEvent event) {
+
+        Country getItemSelected = countryComboBox.getSelectionModel().getSelectedItem();
+        if(getItemSelected.getCountryId() == 1 && getItemSelected != null) {
+            //Clears out observablelist of states
+            stateFiltered.clear();
+            //Sets combobox with cleared out observablelist of states
+            //This is so the same states are not added again
+            stateComboBox.setItems(stateFiltered);
+            for(State s : DBState.getAllStates()) {
+                if(s.getCountryId() == 1) {
+                    stateFiltered.add(s);
+                }
+            }
+            stateComboBox.setItems(stateFiltered);
+        }
+
+        /*
+        for(Country c : DBCountry.getAllCountries()) {
+            if(countryComboBox.getSelectionModel().getSelectedItem().equals(c)){
+                int checkCountryId = c.getCountryId();
+            }
+
+        }
+
+         */
+    }
+
+    @FXML
+    public void onComboSelectState(ActionEvent event) {
+
+    }
+
 }

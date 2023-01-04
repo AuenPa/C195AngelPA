@@ -80,16 +80,19 @@ public class Customer {
     }
 
     //12/26/22 9:13pm
-    public static ObservableList<Customer> displayCustomerList = FXCollections.observableArrayList();
-
+    //public static ObservableList<Customer> displayCustomerList = FXCollections.observableArrayList();
+/*
     public static void addCustomerCM(Customer CM) {
         displayCustomerList.add(CM);
     }
-
+ */
+/*
     public static ObservableList<Customer> getAllCustomersCM () {
         return displayCustomerList;
     }
 
+ */
+/*
     public static void deleteCustomerCM(Customer selectedCustomer) {
         for(Customer SC : getAllCustomersCM()) {
             if(SC.getCustomerId() == selectedCustomer.getCustomerId()) {
@@ -99,12 +102,18 @@ public class Customer {
         }
     }
 
+ */
+/*
     public static void addTestData() {
         for(Customer SC : DBCustomers.getAllCustomers()) {
             addCustomerCM(SC);
         }
     }
+
+ */
+    /*
     static {
         addTestData();
     }
+     */
 }
