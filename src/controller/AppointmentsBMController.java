@@ -11,27 +11,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
-import model.Customer;
 import util.DBAppointments;
-import util.DBCustomers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AppointmentsMenuController implements Initializable {
-
-    @FXML
-    private TableColumn<Appointment, LocalTime> startTimeCol;
-
-    @FXML
-    private TableColumn<Appointment, LocalTime> endTimeCol;
-
+public class AppointmentsBMController implements Initializable {
     @FXML
     private RadioButton allAppointmentRB;
 
@@ -48,22 +38,31 @@ public class AppointmentsMenuController implements Initializable {
     private TableColumn<Appointment, Integer> appointmentIdCol;
 
     @FXML
-    private TableColumn<Appointment, Integer> contactNameCol;
-
-    @FXML
     private TableColumn<Appointment, String> descriptionCol;
 
     @FXML
     private TableView<Appointment> appointmentTable;
 
     @FXML
+    private TableColumn<Appointment, Integer> contactNameCol;
+
+    @FXML
+    private TableColumn<Appointment, Integer> customerIdCol;
+
+    @FXML
     private TableColumn<Appointment, LocalDate> endDateCol;
+
+    @FXML
+    private TableColumn<Appointment, LocalTime> endTimeCol;
 
     @FXML
     private TableColumn<Appointment, String> locationCol;
 
     @FXML
     private TableColumn<Appointment, LocalDate> startDateCol;
+
+    @FXML
+    private TableColumn<Appointment, LocalTime> startTimeCol;
 
     @FXML
     private TableColumn<Appointment, String> titleCol;
@@ -73,9 +72,6 @@ public class AppointmentsMenuController implements Initializable {
 
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
-
-    @FXML
-    private TableColumn<Appointment, Integer> customerIdCol;
 
     private Appointment SA;
 
@@ -117,25 +113,29 @@ public class AppointmentsMenuController implements Initializable {
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDateCol.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         contactNameCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
-        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("assocCustomerId"));
         startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTimeT"));
         endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTimeT"));
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("assocCustomerId"));
+
+
+        //appointmentMonthRB.setSelected(true);
+        //allAppointmentRB.setSelected(false);
     }
 
     @FXML
-    public void toggleToAllAppo(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void toggleToAppoMonth(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
+    public void toggleToAllAppo(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1259, 558);
-        stage.setTitle("From appointments to apps by month");
+        stage.setTitle("From appointments by month to all apps");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void toggleToAppoMonth(ActionEvent event) {
+
     }
 
     @FXML
@@ -148,18 +148,16 @@ public class AppointmentsMenuController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 890, 558);
-        stage.setTitle("From appointments to customer");
+        stage.setTitle("From appointments by month to customer");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    public void updateAppointment(ActionEvent event) {
-
+    public void addAppointment(ActionEvent actionEvent) {
     }
 
     @FXML
-    public void addAppointment(ActionEvent event) {
-
+    public void updateAppointment(ActionEvent actionEvent) {
     }
 }

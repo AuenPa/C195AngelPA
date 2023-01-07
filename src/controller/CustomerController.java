@@ -106,15 +106,27 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    public void toUpdateCustomerScreen(ActionEvent event) {
+    public void toUpdateCustomerScreen(ActionEvent event) throws IOException {
+        Customer SC = customerTable.getSelectionModel().getSelectedItem();
+        UpdateCustomerController.passCustomer(SC);
 
+        if(SC == null) {
+            System.out.println("Customer not selected to modify");
+            return;
+        }
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/UpdateCustomer.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 720, 540);stage.setTitle("From customer menu to update customer");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
     public void goToAppointments(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 871, 558);
+        Scene scene = new Scene(root, 1003, 558);
         stage.setTitle("From customer to appointments");
         stage.setScene(scene);
         stage.show();
@@ -149,5 +161,29 @@ public class CustomerController implements Initializable {
         tableColumn6.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
         divisionName.setCellValueFactory(new PropertyValueFactory<>("division"));
 
+    }
+
+    @FXML
+    public void toggleToAllApps(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1259, 558);
+        stage.setTitle("From customer to appointments");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToAppMonth(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1259, 558);
+        stage.setTitle("From customer to appointments by month");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToAppWeek(ActionEvent event) {
     }
 }

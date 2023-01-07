@@ -16,7 +16,7 @@
       <Label layoutX="94.0" layoutY="238.0" text="Phone Number" />
       <Label layoutX="130.0" layoutY="279.0" text="Country" />
       <Label layoutX="108.0" layoutY="80.0" text="Customer ID" />
-      <TextField fx:id="customerID" layoutX="197.0" layoutY="76.0" />
+      <TextField fx:id="customerID" editable="false" layoutX="197.0" layoutY="76.0" promptText="Auto Gen - Disabled" />
       <TextField fx:id="customerName" layoutX="197.0" layoutY="113.0" />
       <TextField fx:id="address" layoutX="197.0" layoutY="155.0" />
       <TextField fx:id="postalCode" layoutX="197.0" layoutY="194.0" />
@@ -25,6 +25,5 @@
       <Label layoutX="395.0" layoutY="279.0" text="Division" />
       <ComboBox fx:id="stateComboBox" layoutX="461.0" layoutY="275.0" onAction="#onComboSelectState" prefWidth="150.0" />
       <Label layoutX="314.0" layoutY="31.0" text="Add Customer" />
-      <TextField fx:id="tempDivisionID" layoutX="462.0" layoutY="317.0" />
    </children>
 </AnchorPane>

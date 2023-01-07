@@ -19,12 +19,11 @@ import util.DBCountry;
 import util.DBCustomers;
 import util.DBState;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCustomerController implements Initializable {
+public class UpdateCustomerController implements Initializable {
 
     @FXML
     private TextField address;
@@ -47,46 +46,108 @@ public class AddCustomerController implements Initializable {
     @FXML
     private ComboBox<Country> countryComboBox;
 
+    private static Customer sentCustomer;
+
+    public static void passCustomer (Customer customer) {
+        sentCustomer = customer;
+    }
+
+    private State sentCustomerState;
+
+    private Country sentCustomerCountry;
+
     private ObservableList<State> stateFiltered = FXCollections.observableArrayList();
 
-    @FXML
-    public void cancelAddCustomer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 890, 540);
-        stage.setTitle("From add customer to customer");
-        stage.setScene(scene);
-        stage.show();
-    }
 
-    @FXML
-    public void saveAddCustomer(ActionEvent event) throws IOException {
-        DBCustomers.addCustomer(customerName.getText(), address.getText(), postalCode.getText(),
-                phoneNumber.getText(), stateComboBox.getSelectionModel().getSelectedItem().getDivisionId());
-        //Customer.addCustomerCM();
-
-        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 890, 540);
-        stage.setTitle("From add customer to customer");
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<Country> countries = DBCountry.getAllCountries();
-        countryComboBox.setItems(countries);
+        ObservableList<State> slist = DBState.getAllStates();
+        stateComboBox.setItems(slist);
 
-        Country country1 = countries.get(0);
-        countryComboBox.setValue(country1);
-/*
-        ObservableList<State> states = DBState.getAllStates();
-        stateComboBox.setItems(states);
+        ObservableList<Country> clist = DBCountry.getAllCountries();
+        countryComboBox.setItems(clist);
 
- */
+        customerID.setText(String.valueOf(sentCustomer.getCustomerId()));
+        customerName.setText(sentCustomer.getCustomerName());
+        address.setText(sentCustomer.getAddress());
+        postalCode.setText(sentCustomer.getPostalCode());
+        phoneNumber.setText(sentCustomer.getPhoneNumber());
+        //countryComboBox.setItems(sentCustomer.);
+        int stateID = sentCustomer.getDivisionId();
+        //State sentCustomerState = null;
+        for(State S : DBState.getAllStates()) {
+            if(S.getDivisionId() == stateID) {
+                sentCustomerState = S;
+                break;
+            }
+        }
+        stateComboBox.setValue(sentCustomerState);
+
+
+        for(Country C : DBCountry.getAllCountries()) {
+            if(C.getCountryId() == sentCustomerState.getCountryId()) {
+                sentCustomerCountry = C;
+            }
+        }
+        countryComboBox.setValue(sentCustomerCountry);
+
+        if(sentCustomerCountry.getCountryId() == 1) {
+            stateFiltered.clear();
+            stateComboBox.setItems(stateFiltered);
+
+            for(State S : DBState.getAllStates()) {
+                if(S.getCountryId() == 1) {
+                    stateFiltered.add(S);
+                }
+            }
+            stateComboBox.setItems(stateFiltered);
+        }
+
+        else if(sentCustomerCountry.getCountryId() == 2) {
+            stateFiltered.clear();
+            stateComboBox.setItems(stateFiltered);
+            for(State s :DBState.getAllStates()) {
+                if(s.getCountryId() == 2) {
+                    stateFiltered.add(s);
+                }
+            }
+            stateComboBox.setItems(stateFiltered);
+        }
+        else if(sentCustomerCountry.getCountryId() == 3) {
+            stateFiltered.clear();
+            stateComboBox.setItems(stateFiltered);
+            for(State s : DBState.getAllStates()) {
+                if(s.getCountryId() == 3) {
+                    stateFiltered.add(s);
+                }
+            }
+            stateComboBox.setItems(stateFiltered);
+        }
+
+    }
+
+    @FXML
+    public void saveUpdateCustomer(ActionEvent event) throws IOException {
+        DBCustomers.updateCustomer(sentCustomer.getCustomerId(), customerName.getText(), address.getText(), postalCode.getText(), phoneNumber.getText(), stateComboBox.getSelectionModel().getSelectedItem().getDivisionId());
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 890, 540);
+        stage.setTitle("From update customer to customer");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void cancelUpdateCustomer(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 890, 540);
+        stage.setTitle("From update customer to customer");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -127,21 +188,10 @@ public class AddCustomerController implements Initializable {
             }
             stateComboBox.setItems(stateFiltered);
         }
-
-        /*
-        for(Country c : DBCountry.getAllCountries()) {
-            if(countryComboBox.getSelectionModel().getSelectedItem().equals(c)){
-                int checkCountryId = c.getCountryId();
-            }
-
-        }
-
-         */
     }
 
     @FXML
     public void onComboSelectState(ActionEvent event) {
 
     }
-
 }

@@ -74,4 +74,24 @@ public class DBCustomers {
         }
     }
 
+    public static void updateCustomer(int customerId, String customerName, String address, String postalCode, String phoneNum, int divisionId) {
+
+        try{
+            String sqlc = "UPDATE customers set Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+
+            PreparedStatement pst = JDBC.getConnection().prepareStatement(sqlc);
+
+            pst.setString(1, customerName);
+            pst.setString(2, address);
+            pst.setString(3, postalCode);
+            pst.setString(4, phoneNum);
+            pst.setInt(5, divisionId);
+            pst.setInt(6, customerId);
+            pst.execute();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 }

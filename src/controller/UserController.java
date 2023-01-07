@@ -38,7 +38,7 @@ public class UserController implements Initializable {
 
                 Parent root = FXMLLoader.load(getClass().getResource("../view/AppointmentsMenu.fxml"));
                 Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root, 871, 558);
+                Scene scene = new Scene(root, 1259, 558);
                 stage.setTitle("Customer/Appointment Form");
                 stage.setScene(scene);
                 stage.show();
