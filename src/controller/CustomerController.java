@@ -123,16 +123,6 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    public void goToAppointments(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1003, 558);
-        stage.setTitle("From customer to appointments");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
     public void logout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");
 

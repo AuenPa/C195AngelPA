@@ -154,12 +154,16 @@ public class AppointmentsMenuController implements Initializable {
     }
 
     @FXML
-    public void updateAppointment(ActionEvent event) {
+    public void toUpdateAppointment(ActionEvent event) {
 
     }
 
     @FXML
-    public void addAppointment(ActionEvent event) {
-
+    public void toAddAppointment(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 720, 540);stage.setTitle("From appointment menu to add appointment");
+        stage.setScene(scene);
+        stage.show();
     }
 }

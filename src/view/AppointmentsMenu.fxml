@@ -31,8 +31,8 @@
       <RadioButton fx:id="appointmentMonthRB" layoutX="242.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoMonth" text="Appointments by Month" />
       <RadioButton fx:id="customerRB" layoutX="587.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToCustomer" text="Customers" />
       <RadioButton fx:id="allAppointmentRB" layoutX="104.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAllAppo" selected="true" text="All Appointments" />
-      <Button layoutX="312.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateAppointment" text="Update" />
-      <Button layoutX="231.0" layoutY="488.0" mnemonicParsing="false" onAction="#addAppointment" text="Add" />
+      <Button layoutX="312.0" layoutY="488.0" mnemonicParsing="false" onAction="#toUpdateAppointment" text="Update" />
+      <Button layoutX="231.0" layoutY="488.0" mnemonicParsing="false" onAction="#toAddAppointment" text="Add" />
       <Button layoutX="600.0" layoutY="488.0" mnemonicParsing="false" text="Logout" />
    </children>
 </AnchorPane>

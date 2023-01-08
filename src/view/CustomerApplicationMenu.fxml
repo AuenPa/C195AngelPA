@@ -24,7 +24,6 @@
       <Button layoutX="72.0" layoutY="491.0" mnemonicParsing="false" onAction="#toAddCustomerScreen" text="Add" />
       <Button layoutX="200.0" layoutY="491.0" mnemonicParsing="false" onAction="#deleteSelectedCustomer" text="Delete" />
       <Button layoutX="333.0" layoutY="491.0" mnemonicParsing="false" onAction="#toUpdateCustomerScreen" text="Update" />
-      <Button layoutX="731.0" layoutY="76.0" mnemonicParsing="false" onAction="#goToAppointments" text="Appointment Form" />
       <Button layoutX="478.0" layoutY="491.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
       <RadioButton fx:id="allAppointmentRB" layoutX="48.0" layoutY="80.0" mnemonicParsing="false" onAction="#toggleToAllApps" text="All appointments" />
       <RadioButton fx:id="appointmentMonthRB" layoutX="182.0" layoutY="80.0" mnemonicParsing="false" onAction="#toggleToAppMonth" text="Appointments by month" />

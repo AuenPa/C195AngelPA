@@ -79,9 +79,6 @@ public class AddCustomerController implements Initializable {
 
         ObservableList<Country> countries = DBCountry.getAllCountries();
         countryComboBox.setItems(countries);
-
-        Country country1 = countries.get(0);
-        countryComboBox.setValue(country1);
 /*
         ObservableList<State> states = DBState.getAllStates();
         stateComboBox.setItems(states);

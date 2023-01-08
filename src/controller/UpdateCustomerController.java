@@ -63,6 +63,7 @@ public class UpdateCustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //probably don't need this
         ObservableList<State> slist = DBState.getAllStates();
         stateComboBox.setItems(slist);
 

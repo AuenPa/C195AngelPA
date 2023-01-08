@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class DBAppointments {
+
     public static ObservableList<Appointment> getAllAppointments() {
         ObservableList<Appointment> alist = FXCollections.observableArrayList();
-
         try {
             String sql = "SELECT Appointment_ID, Title, Description, Location, Contact_Name, Type, Start, End, Customer_ID, appointments.User_ID FROM appointments, contacts, users WHERE appointments.Contact_ID = contacts.Contact_ID AND appointments.User_ID = users.User_ID";
 
@@ -55,6 +55,26 @@ public class DBAppointments {
         }
         return alist;
 
+    }
+
+    public static void addAppointment(String title, String description, String location, String type, Timestamp startT, Timestamp endT, int assocCustId, int contactId, int userId) {
+        try {
+            String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(3, location);
+            ps.setString(4, type);
+            ps.setTimestamp(5, startT);
+            ps.setTimestamp(6, endT);
+            ps.setInt(7, assocCustId);
+            ps.setInt(8, contactId);
+            ps.setInt(9, userId);
+            ps.execute();
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void deleteAppointment(int appointmentId) throws SQLException {
