@@ -19,11 +19,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.temporal.IsoFields;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AppointmentsBMController implements Initializable {
+public class AppointmentBWController implements Initializable {
     @FXML
     private RadioButton allAppointmentRB;
 
@@ -102,16 +108,49 @@ public class AppointmentsBMController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //CHANGE MONTH TO WEEK ON OBSERVABLELIST OF APPOINTMENTS
         //appointmentTable.setItems(DBAppointments.getAllAppointments());
-        ObservableList<Appointment> filterAppsByMonthList = FXCollections.observableArrayList();
+        ObservableList<Appointment> filterAppsByWeekList = FXCollections.observableArrayList();
+
+        ZoneId z = ZoneId.systemDefault();
+        LocalDate today = LocalDate.now(z);
+        int wOfWBasedY = today.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        int wOfY = today.get(IsoFields.WEEK_BASED_YEAR);
+        String todayWeekISO = wOfY + "-W" + String.format("%02d", wOfWBasedY);
+
+        //Instead of using IsoFields, use WeekFields
+        //I tried using them a while back but they did not register
+        //I'm not sure why. Anyways...
+        //This is used to get the current week of the year in terms of a week starting on a Sunday
+        TemporalField currentWeekOfYear = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+        LocalDate todaysDate = LocalDate.now();
+        int presentWeekOfYear = todaysDate.get(currentWeekOfYear);
+
         for(Appointment a : DBAppointments.getAllAppointments()) {
+            /*
+            LocalDate fromDBAppointment = a.getStartDate();
+            int fromDBAppWWBY = fromDBAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+            int fromDBAppWY = fromDBAppointment.get(IsoFields.WEEK_BASED_YEAR);
+            String compareFromDBApps = fromDBAppWY + "-W" + String.format("%02d", fromDBAppWWBY);
+             */
+            //Need to make localdatetime of appointment a to get appointment week number *MAYBE NOT AFTER ALL*
+            LocalDateTime appLDT = LocalDateTime.of(a.getStartDate(),a.getStartTimeT());
+            TemporalField appointmentWeek = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            int appWeekNum = a.getStartDate().get(appointmentWeek);
             if(a.getStartDate().getMonth() == LocalDate.now().getMonth() &&
-               a.getStartDate().getYear() == LocalDate.now().getYear()) {
-                filterAppsByMonthList.add(a);
+                    a.getStartDate().getYear() == LocalDate.now().getYear() &&
+                    appWeekNum == presentWeekOfYear
+               ) {
+                filterAppsByWeekList.add(a);
+                //System.out.println(appWeekNum);
             }
+            System.out.println(appWeekNum);
         }
 
-        appointmentTable.setItems(filterAppsByMonthList);
+
+        //System.out.println(presentWeekOfYear);
+
+        appointmentTable.setItems(filterAppsByWeekList);
 
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -135,24 +174,24 @@ public class AppointmentsBMController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From appointments by month to all apps");
+        stage.setTitle("From appointments by week to all apps");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    public void toggleToAppoMonth(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void toggleToAppoWeek(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
+    public void toggleToAppoMonth(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From appointments to apps by week");
+        stage.setTitle("From appointments by week to all apps");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void toggleToAppoWeek(ActionEvent event) {
+
     }
 
     @FXML
@@ -160,7 +199,7 @@ public class AppointmentsBMController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 890, 558);
-        stage.setTitle("From appointments by month to customer");
+        stage.setTitle("From appointments by week to customer");
         stage.setScene(scene);
         stage.show();
     }

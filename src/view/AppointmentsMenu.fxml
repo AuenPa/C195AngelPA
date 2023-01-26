@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="558.0" prefWidth="1259.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsMenuController">
+<AnchorPane prefHeight="558.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsMenuController">
    <children>
-      <TableView fx:id="appointmentTable" layoutX="57.0" layoutY="102.0" prefHeight="369.0" prefWidth="1145.0">
+      <TableView fx:id="appointmentTable" layoutX="57.0" layoutY="102.0" prefHeight="369.0" prefWidth="1009.0">
         <columns>
           <TableColumn fx:id="appointmentIdCol" prefWidth="99.0" text="Appointment ID" />
           <TableColumn fx:id="titleCol" prefWidth="51.0" text="Title" />
@@ -17,7 +17,6 @@
             <TableColumn fx:id="locationCol" prefWidth="75.0" text="Location" />
             <TableColumn fx:id="typeCol" prefWidth="100.0" text="Type" />
             <TableColumn fx:id="startDateCol" prefWidth="136.0" text="Start Date" />
-            <TableColumn fx:id="endDateCol" prefWidth="136.0" text="End Date" />
             <TableColumn fx:id="contactNameCol" prefWidth="167.0" text="Contact Name" />
             <TableColumn fx:id="userIdCol" prefWidth="46.0" text="User ID" />
             <TableColumn fx:id="customerIdCol" prefWidth="75.0" text="Customer ID" />

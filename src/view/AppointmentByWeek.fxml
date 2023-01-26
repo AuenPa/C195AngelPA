@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="558.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsBMController">
+<AnchorPane prefHeight="558.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentBWController">
     <children>
         <TableView fx:id="appointmentTable" layoutX="57.0" layoutY="102.0" prefHeight="369.0" prefWidth="1009.0">
             <columns>
@@ -17,21 +17,21 @@
                 <TableColumn fx:id="locationCol" prefWidth="75.0" text="Location" />
                 <TableColumn fx:id="typeCol" prefWidth="100.0" text="Type" />
                 <TableColumn fx:id="startDateCol" prefWidth="136.0" text="Start Date" />
-            <TableColumn fx:id="contactNameCol" prefWidth="167.0" text="Contact Name" />
-            <TableColumn fx:id="userIdCol" prefWidth="46.0" text="User ID" />
-            <TableColumn fx:id="customerIdCol" prefWidth="75.0" text="Customer ID" />
-            <TableColumn fx:id="startTimeCol" prefWidth="92.0" text="Start Time" />
-            <TableColumn fx:id="endTimeCol" prefWidth="92.0" text="End Time" />
+                <TableColumn fx:id="contactNameCol" prefWidth="167.0" text="Contact Name" />
+                <TableColumn fx:id="userIdCol" prefWidth="46.0" text="User ID" />
+                <TableColumn fx:id="customerIdCol" prefWidth="75.0" text="Customer ID" />
+                <TableColumn fx:id="startTimeCol" prefWidth="92.0" text="Start Time" />
+                <TableColumn fx:id="endTimeCol" prefWidth="92.0" text="End Time" />
             </columns>
         </TableView>
         <Button layoutX="406.0" layoutY="488.0" mnemonicParsing="false" onAction="#deleteAppointment" text="Delete" />
-        <Label layoutX="565.0" layoutY="23.0" text="Appointments By Month" />
-        <RadioButton fx:id="appointmentWeekRB" layoutX="417.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoWeek" text="Appointments by Week" />
-        <RadioButton fx:id="appointmentMonthRB" layoutX="242.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoMonth" selected="true" text="Appointments by Month" />
+        <Label layoutX="565.0" layoutY="23.0" text="Appointments By Week" />
+        <RadioButton fx:id="appointmentWeekRB" layoutX="417.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoWeek" selected="true" text="Appointments by Week" />
+        <RadioButton fx:id="appointmentMonthRB" layoutX="242.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoMonth" text="Appointments by Month" />
         <RadioButton fx:id="customerRB" layoutX="587.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToCustomer" text="Customers" />
         <RadioButton fx:id="allAppointmentRB" layoutX="104.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAllAppo" text="All Appointments" />
-      <Button layoutX="308.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateAppointment" text="Update" />
-      <Button layoutX="205.0" layoutY="488.0" mnemonicParsing="false" onAction="#addAppointment" text="Add" />
-      <Button layoutX="587.0" layoutY="488.0" mnemonicParsing="false" text="Logout" />
+        <Button layoutX="308.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateAppointment" text="Update" />
+        <Button layoutX="205.0" layoutY="488.0" mnemonicParsing="false" onAction="#addAppointment" text="Add" />
+        <Button layoutX="587.0" layoutY="488.0" mnemonicParsing="false" text="Logout" />
     </children>
 </AnchorPane>

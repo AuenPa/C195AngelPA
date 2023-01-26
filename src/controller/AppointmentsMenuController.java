@@ -57,9 +57,6 @@ public class AppointmentsMenuController implements Initializable {
     private TableView<Appointment> appointmentTable;
 
     @FXML
-    private TableColumn<Appointment, LocalDate> endDateCol;
-
-    @FXML
     private TableColumn<Appointment, String> locationCol;
 
     @FXML
@@ -115,7 +112,6 @@ public class AppointmentsMenuController implements Initializable {
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateCol.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         contactNameCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("assocCustomerId"));
@@ -132,15 +128,20 @@ public class AppointmentsMenuController implements Initializable {
     public void toggleToAppoMonth(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1259, 558);
+        Scene scene = new Scene(root, 1132, 558);
         stage.setTitle("From appointments to apps by month");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    public void toggleToAppoWeek(ActionEvent event) {
-
+    public void toggleToAppoWeek(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1132, 558);
+        stage.setTitle("From appointments to apps by week");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -162,7 +163,7 @@ public class AppointmentsMenuController implements Initializable {
     public void toAddAppointment(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 720, 540);stage.setTitle("From appointment menu to add appointment");
+        Scene scene = new Scene(root, 695, 430);stage.setTitle("From appointment menu to add appointment");
         stage.setScene(scene);
         stage.show();
     }

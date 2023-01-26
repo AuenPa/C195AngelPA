@@ -157,7 +157,7 @@ public class CustomerController implements Initializable {
     public void toggleToAllApps(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1259, 558);
+        Scene scene = new Scene(root, 1132, 558);
         stage.setTitle("From customer to appointments");
         stage.setScene(scene);
         stage.show();
@@ -167,13 +167,19 @@ public class CustomerController implements Initializable {
     public void toggleToAppMonth(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1259, 558);
+        Scene scene = new Scene(root, 1132, 558);
         stage.setTitle("From customer to appointments by month");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    public void toggleToAppWeek(ActionEvent event) {
+    public void toggleToAppWeek(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1132, 558);
+        stage.setTitle("From appointments to apps by week");
+        stage.setScene(scene);
+        stage.show();
     }
 }
