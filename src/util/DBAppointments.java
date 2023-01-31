@@ -76,6 +76,26 @@ public class DBAppointments {
             e.printStackTrace();
         }
     }
+    public static void updateAppointment(int appointmentId, String title, String description, String location, String type, Timestamp startT, Timestamp endT, int assocCustId, int contactId, int userId) {
+        try {
+            String sql = "UPDATE appointments set Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, Contact_ID = ?, User_ID = ? WHERE Appointment_ID = ?";
+            PreparedStatement pst = JDBC.getConnection().prepareStatement(sql);
+            pst.setString(1, title);
+            pst.setString(2, description);
+            pst.setString(3, location);
+            pst.setString(4, type);
+            pst.setTimestamp(5, startT);
+            pst.setTimestamp(6, endT);
+            pst.setInt(7, assocCustId);
+            pst.setInt(8, contactId);
+            pst.setInt(9, userId);
+            pst.setInt(10, appointmentId);
+            pst.execute();
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void deleteAppointment(int appointmentId) throws SQLException {
         String sql = "DELETE from appointments WHERE Appointment_ID = ?";

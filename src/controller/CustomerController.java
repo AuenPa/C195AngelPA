@@ -70,6 +70,10 @@ public class CustomerController implements Initializable {
                 DBCustomers.deleteCustomer(SC.getCustomerId());
                 //Customer.deleteCustomerCM(SC);
                 customerTable.setItems(DBCustomers.getAllCustomers());
+                Alert deleteComplete = new Alert(Alert.AlertType.INFORMATION);
+                deleteComplete.setTitle("Deletion Complete");
+                deleteComplete.setHeaderText("Customer Removed");
+                deleteComplete.show();
             }
 
         }
@@ -78,10 +82,11 @@ public class CustomerController implements Initializable {
             for(Appointment a : DBAppointments.getAllAppointments()) {
                 //had to add SC != null before because it doesn't go to the next and final if statement (i.e., nothing selected)
                 if(SC != null && SC.getCustomerId() == a.getAssocCustomerId()) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Delete associated appointment first");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
-                    alert.setContentText("Can't delete");
+                    alert.setContentText("Delete associated appointment(s) first");
                     alert.showAndWait();
+                    break;
                 }
             }
             if(SC == null) {

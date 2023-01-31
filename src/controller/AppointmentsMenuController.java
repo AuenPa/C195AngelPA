@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -117,6 +118,31 @@ public class AppointmentsMenuController implements Initializable {
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("assocCustomerId"));
         startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTimeT"));
         endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTimeT"));
+/*
+        for(Appointment a : DBAppointments.getAllAppointments()) {
+            LocalTime startTime = a.getStartTimeT();
+            LocalTime currentTime = LocalTime.now();
+            long timeDifference = ChronoUnit.MINUTES.between(currentTime, startTime);
+            LocalDateTime startLDT = LocalDateTime.of(a.getStartDate(), a.getStartTimeT());
+            LocalDateTime currentLDT = LocalDateTime.now();
+            long LDTDifference = ChronoUnit.MINUTES.between(currentLDT, startLDT);
+            LocalDate appDate = a.getStartDate();
+            LocalDate todaysDate = LocalDate.now();
+            if(LDTDifference > 0 && LDTDifference <= 15) {
+                Alert appointmentUpcoming = new Alert(Alert.AlertType.INFORMATION);
+                appointmentUpcoming.setTitle("Appointment Coming up");
+                appointmentUpcoming.setContentText("You have an appointment in " + timeDifference + " minute(s)\nAppointment ID: " + a.getAppointmentId());
+                appointmentUpcoming.showAndWait();
+            }
+            else if(LDTDifference <= 0 && appDate.equals(todaysDate) ) {
+                Alert appPastDue = new Alert(Alert.AlertType.INFORMATION);
+                appPastDue.setTitle("Appointment past due");
+                appPastDue.setContentText("Appointment started " + timeDifference * -1 + " minutes ago\nAppointment ID: " + a.getAppointmentId());
+                appPastDue.showAndWait();
+            }
+        }
+
+ */
     }
 
     @FXML
@@ -155,8 +181,20 @@ public class AppointmentsMenuController implements Initializable {
     }
 
     @FXML
-    public void toUpdateAppointment(ActionEvent event) {
+    public void toUpdateAppointment(ActionEvent event) throws IOException {
+        Appointment SA = appointmentTable.getSelectionModel().getSelectedItem();
+        UpdateAppointmentController.passAppointment(SA);
 
+        if(SA == null) {
+            System.out.println("Appointment not selected to modify");
+            return;
+        }
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 695, 430);stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -166,5 +204,22 @@ public class AppointmentsMenuController implements Initializable {
         Scene scene = new Scene(root, 695, 430);stage.setTitle("From appointment menu to add appointment");
         stage.setScene(scene);
         stage.show();
+    }
+
+
+    @FXML
+    public void logout(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 743, 526);
+            stage.setTitle("Logged out");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 }

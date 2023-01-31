@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -61,16 +62,24 @@ public class AddCustomerController implements Initializable {
 
     @FXML
     public void saveAddCustomer(ActionEvent event) throws IOException {
-        DBCustomers.addCustomer(customerName.getText(), address.getText(), postalCode.getText(),
-                phoneNumber.getText(), stateComboBox.getSelectionModel().getSelectedItem().getDivisionId());
-        //Customer.addCustomerCM();
+        if(customerName.getText().isBlank() || address.getText().isBlank() || postalCode.getText().isBlank() || phoneNumber.getText().isBlank() || stateComboBox.getValue() == null) {
+            Alert emptyFields = new Alert(Alert.AlertType.ERROR);
+            emptyFields.setTitle("Empty field(s)");
+            emptyFields.setContentText("Fill out all field(s)");
+            emptyFields.showAndWait();
+        }
+        else {
+            DBCustomers.addCustomer(customerName.getText(), address.getText(), postalCode.getText(),
+                    phoneNumber.getText(), stateComboBox.getSelectionModel().getSelectedItem().getDivisionId());
+            //Customer.addCustomerCM();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 890, 540);
-        stage.setTitle("From add customer to customer");
-        stage.setScene(scene);
-        stage.show();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 890, 540);
+            stage.setTitle("From add customer to customer");
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
