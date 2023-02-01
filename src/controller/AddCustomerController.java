@@ -55,7 +55,7 @@ public class AddCustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 890, 540);
-        stage.setTitle("From add customer to customer");
+        //stage.setTitle("From add customer to customer");
         stage.setScene(scene);
         stage.show();
     }
@@ -76,7 +76,7 @@ public class AddCustomerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 890, 540);
-            stage.setTitle("From add customer to customer");
+            //stage.setTitle("From add customer to customer");
             stage.setScene(scene);
             stage.show();
         }

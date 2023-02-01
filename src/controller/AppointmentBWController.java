@@ -174,7 +174,7 @@ public class AppointmentBWController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From appointments by week to all apps");
+        //stage.setTitle("From appointments by week to all apps");
         stage.setScene(scene);
         stage.show();
     }
@@ -184,7 +184,7 @@ public class AppointmentBWController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From appointments by week to all apps");
+        //stage.setTitle("From appointments by week to all apps");
         stage.setScene(scene);
         stage.show();
     }
@@ -199,7 +199,7 @@ public class AppointmentBWController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 890, 558);
-        stage.setTitle("From appointments by week to customer");
+        //stage.setTitle("From appointments by week to customer");
         stage.setScene(scene);
         stage.show();
     }
@@ -208,12 +208,43 @@ public class AppointmentBWController implements Initializable {
     public void addAppointment(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 695, 430);stage.setTitle("From appointment menu to add appointment");
+        Scene scene = new Scene(root, 695, 430);
+        //stage.setTitle("From appointment menu to add appointment");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
-    public void updateAppointment(ActionEvent actionEvent) {
+    public void updateAppointment(ActionEvent event) throws IOException {
+        Appointment SA = appointmentTable.getSelectionModel().getSelectedItem();
+        UpdateAppointmentController.passAppointment(SA);
+
+        if(SA == null) {
+            System.out.println("Appointment not selected to modify");
+            return;
+        }
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 695, 430);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void logout(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 743, 526);
+            //stage.setTitle("Logged out");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 }

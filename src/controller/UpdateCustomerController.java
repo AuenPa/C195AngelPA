@@ -144,7 +144,7 @@ public class UpdateCustomerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 890, 540);
-            stage.setTitle("From update customer to customer");
+            //stage.setTitle("From update customer to customer");
             stage.setScene(scene);
             stage.show();
         }
@@ -155,7 +155,7 @@ public class UpdateCustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 890, 540);
-        stage.setTitle("From update customer to customer");
+        //stage.setTitle("From update customer to customer");
         stage.setScene(scene);
         stage.show();
     }

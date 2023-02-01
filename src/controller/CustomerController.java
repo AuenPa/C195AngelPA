@@ -104,7 +104,8 @@ public class CustomerController implements Initializable {
     public void toAddCustomerScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 720, 540);stage.setTitle("From customer menu to add customer");
+        Scene scene = new Scene(root, 720, 540);
+        //stage.setTitle("From customer menu to add customer");
         stage.setScene(scene);
         stage.show();
 
@@ -122,7 +123,8 @@ public class CustomerController implements Initializable {
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/UpdateCustomer.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 720, 540);stage.setTitle("From customer menu to update customer");
+        Scene scene = new Scene(root, 720, 540);
+        //stage.setTitle("From customer menu to update customer");
         stage.setScene(scene);
         stage.show();
     }
@@ -137,7 +139,7 @@ public class CustomerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 743, 526);
-            stage.setTitle("Logged out");
+            //stage.setTitle("Logged out");
             stage.setScene(scene);
             stage.show();
         }
@@ -163,7 +165,7 @@ public class CustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From customer to appointments");
+        //stage.setTitle("From customer to appointments");
         stage.setScene(scene);
         stage.show();
     }
@@ -173,7 +175,7 @@ public class CustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From customer to appointments by month");
+        //stage.setTitle("From customer to appointments by month");
         stage.setScene(scene);
         stage.show();
     }
@@ -183,7 +185,7 @@ public class CustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From appointments to apps by week");
+        //stage.setTitle("From appointments to apps by week");
         stage.setScene(scene);
         stage.show();
     }

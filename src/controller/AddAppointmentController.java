@@ -107,7 +107,7 @@ public class AddAppointmentController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1132, 558);
-        stage.setTitle("From add app to appointments");
+        //stage.setTitle("From add app to appointments");
         stage.setScene(scene);
         stage.show();
     }
@@ -211,7 +211,7 @@ public class AddAppointmentController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1259, 558);
-            stage.setTitle("From customer to appointments");
+            //stage.setTitle("From customer to appointments");
             stage.setScene(scene);
             stage.show();
         }
