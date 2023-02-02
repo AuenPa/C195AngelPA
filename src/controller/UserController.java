@@ -63,7 +63,6 @@ public class UserController implements Initializable {
     public void loginToAppointments(ActionEvent event) throws IOException {
 
         ObservableList<User> userList = DBUsers.getAllUsers();
-        System.out.println(userList.get(1).getUserName());
         if( (userList.get(0).getUserName().equals(userName.getText())
             && userList.get(0).getPassword().equals(passWord.getText())) || (userList.get(1).getUserName().equals(userName.getText()) && userList.get(1).getPassword().equals(passWord.getText())) ) {
 
@@ -143,7 +142,6 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId localZoneID = ZoneId.of(TimeZone.getDefault().getID());
-        System.out.println(localZoneID);
         String zoneString = localZoneID.toString();
         localZone.setText(zoneString);
 

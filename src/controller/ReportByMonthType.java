@@ -56,9 +56,6 @@ public class ReportByMonthType implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Month> monthList = FXCollections.observableArrayList();
         monthList.addAll(Arrays.asList(Month.values()));
-        for(int i = 0; i < 12; i++) {
-            System.out.println(monthList.get(i));
-        }
         monthCB.setItems(monthList);
     }
 
@@ -91,6 +88,21 @@ public class ReportByMonthType implements Initializable {
             }
         }
         numberOfAppointmentsLabel.setText(String.valueOf(counter));
+    }
+
+    @FXML
+    public void toggleToReports2(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1132, 558);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToReports3(ActionEvent event) {
+
     }
 
 }

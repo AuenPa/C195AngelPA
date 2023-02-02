@@ -25,13 +25,14 @@
             </columns>
         </TableView>
         <Button layoutX="406.0" layoutY="488.0" mnemonicParsing="false" onAction="#deleteAppointment" text="Delete" />
-        <Label layoutX="565.0" layoutY="23.0" text="Appointments By Month" />
+        <Label layoutX="501.0" layoutY="21.0" text="Appointments By Month" />
         <RadioButton fx:id="appointmentWeekRB" layoutX="417.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoWeek" text="Appointments by Week" />
         <RadioButton fx:id="appointmentMonthRB" layoutX="242.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoMonth" selected="true" text="Appointments by Month" />
         <RadioButton fx:id="customerRB" layoutX="587.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToCustomer" text="Customers" />
         <RadioButton fx:id="allAppointmentRB" layoutX="104.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAllAppo" text="All Appointments" />
-        <RadioButton fx:id="reportsRB1" layoutX="693.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports" text="Reports" />
-
+        <RadioButton fx:id="reportsRB2" layoutX="798.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports2" text="Report 2" />
+        <RadioButton fx:id="reportsRB3" layoutX="901.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports3" text="Report 3" />
+        <RadioButton fx:id="reportsRB1" layoutX="694.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports1" text="Report 1" />
         <Button layoutX="308.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateAppointment" text="Update" />
       <Button layoutX="205.0" layoutY="488.0" mnemonicParsing="false" onAction="#addAppointment" text="Add" />
       <Button layoutX="587.0" layoutY="488.0" mnemonicParsing="false" onAction="#logout" text="Logout" />

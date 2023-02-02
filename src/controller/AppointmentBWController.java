@@ -144,7 +144,7 @@ public class AppointmentBWController implements Initializable {
                 filterAppsByWeekList.add(a);
                 //System.out.println(appWeekNum);
             }
-            System.out.println(appWeekNum);
+            //System.out.println(appWeekNum);
         }
 
 
@@ -202,6 +202,30 @@ public class AppointmentBWController implements Initializable {
         //stage.setTitle("From appointments by week to customer");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void toggleToReports1(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 600, 400);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToReports2(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1132, 558);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToReports3(ActionEvent event) {
     }
 
     @FXML

@@ -210,7 +210,7 @@ public class AppointmentsMenuController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+/*
     @FXML
     public void toggleToReports(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
@@ -220,6 +220,8 @@ public class AppointmentsMenuController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+ */
 
     @FXML
     public void logout(ActionEvent event) throws IOException {
@@ -236,4 +238,30 @@ public class AppointmentsMenuController implements Initializable {
             stage.show();
         }
     }
+
+    @FXML
+    public void toggleToReports1(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 600, 400);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToReports2(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1132, 558);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void toggleToReports3(ActionEvent event) {
+    }
+
+
 }

@@ -33,6 +33,8 @@
       <Button layoutX="312.0" layoutY="488.0" mnemonicParsing="false" onAction="#toUpdateAppointment" text="Update" />
       <Button layoutX="231.0" layoutY="488.0" mnemonicParsing="false" onAction="#toAddAppointment" text="Add" />
       <Button layoutX="600.0" layoutY="488.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
-      <RadioButton fx:id="reportsRB1" layoutX="693.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports" text="Reports" />
+       <RadioButton fx:id="reportsRB2" layoutX="798.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports2" text="Report 2" />
+       <RadioButton fx:id="reportsRB3" layoutX="901.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports3" text="Report 3" />
+       <RadioButton fx:id="reportsRB1" layoutX="694.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports1" text="Report 1" />
    </children>
 </AnchorPane>
