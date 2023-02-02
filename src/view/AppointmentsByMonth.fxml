@@ -30,7 +30,9 @@
         <RadioButton fx:id="appointmentMonthRB" layoutX="242.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAppoMonth" selected="true" text="Appointments by Month" />
         <RadioButton fx:id="customerRB" layoutX="587.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToCustomer" text="Customers" />
         <RadioButton fx:id="allAppointmentRB" layoutX="104.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAllAppo" text="All Appointments" />
-      <Button layoutX="308.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateAppointment" text="Update" />
+        <RadioButton fx:id="reportsRB1" layoutX="693.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports" text="Reports" />
+
+        <Button layoutX="308.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateAppointment" text="Update" />
       <Button layoutX="205.0" layoutY="488.0" mnemonicParsing="false" onAction="#addAppointment" text="Add" />
       <Button layoutX="587.0" layoutY="488.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
     </children>

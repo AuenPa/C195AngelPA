@@ -64,7 +64,6 @@ public class UserController implements Initializable {
 
         ObservableList<User> userList = DBUsers.getAllUsers();
         System.out.println(userList.get(1).getUserName());
-        int counter = 0;
         if( (userList.get(0).getUserName().equals(userName.getText())
             && userList.get(0).getPassword().equals(passWord.getText())) || (userList.get(1).getUserName().equals(userName.getText()) && userList.get(1).getPassword().equals(passWord.getText())) ) {
 
@@ -87,8 +86,9 @@ public class UserController implements Initializable {
                         appointmentUpcoming.setTitle("Appointment Coming up");
                         appointmentUpcoming.setContentText("You have an appointment in " + LDTDifference + " minute(s)\nAppointment ID: " + a.getAppointmentId() + "\nDate: " + a.getStartDate() + "\nTime: " + a.getStartTimeT());
                         appointmentUpcoming.showAndWait();
-                        count++;
                     }
+                    count++;
+
                 }
 
             }
@@ -100,6 +100,7 @@ public class UserController implements Initializable {
                     noAppToday.setTitle(rb.getString("noAppTitle"));
                     noAppToday.setHeaderText(rb.getString("noAppHT"));
                     noAppToday.setContentText(rb.getString("noAppContext"));
+                    noAppToday.showAndWait();
                 }
                 else {
                     noAppToday.setTitle("Pending Appointments");
@@ -118,21 +119,23 @@ public class UserController implements Initializable {
             //stage.setTitle("Customer/Appointment Form");
             stage.setScene(scene);
             stage.show();
-            counter++;
         }
         else {
             Alert wrongLoginCreds = new Alert(Alert.AlertType.ERROR);
+            if(Locale.getDefault().getLanguage().equals("fr")) {
+                wrongLoginCreds.setTitle(rb.getString("wrongLogin1"));
+                wrongLoginCreds.setHeaderText(rb.getString("wrongLogin2"));
+                wrongLoginCreds.setContentText(rb.getString("wrongLogin3"));
+                wrongLoginCreds.showAndWait();
+            }
+            else {
+                wrongLoginCreds.setTitle("Error Login");
+                wrongLoginCreds.setHeaderText("Wrong username/password");
+                wrongLoginCreds.setContentText("Username or password entered incorrectly");
+                wrongLoginCreds.showAndWait();
+            }
+        }
 
-            wrongLoginCreds.setTitle("Error Login");
-            wrongLoginCreds.setHeaderText("Wrong username/password");
-            wrongLoginCreds.setContentText("Username or password entered incorrectly");
-            wrongLoginCreds.showAndWait();
-        }
-        if(counter == 2) {
-            System.out.println("Wrong username or password");
-            //counter = 0;
-        }
-        counter = 0;
 
     }
 

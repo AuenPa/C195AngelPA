@@ -29,5 +29,6 @@
       <RadioButton fx:id="appointmentMonthRB" layoutX="182.0" layoutY="80.0" mnemonicParsing="false" onAction="#toggleToAppMonth" text="Appointments by month" />
       <RadioButton fx:id="appointmentWeekRB" layoutX="360.0" layoutY="80.0" mnemonicParsing="false" onAction="#toggleToAppWeek" text="Appointments by week" />
       <RadioButton layoutX="532.0" layoutY="80.0" mnemonicParsing="false" selected="true" text="Customers" />
+      <RadioButton layoutX="635.0" layoutY="80.0" mnemonicParsing="false" onAction="#toggleToReports" text="Reports" />
    </children>
 </AnchorPane>
