@@ -2,7 +2,7 @@ package util;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.State;
+import model.Division;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class DBState {
 
-    public static ObservableList<State> getAllStates() {
-        ObservableList<State> slist = FXCollections.observableArrayList();
+    public static ObservableList<Division> getAllStates() {
+        ObservableList<Division> slist = FXCollections.observableArrayList();
 
 
         try {
@@ -25,7 +25,7 @@ public class DBState {
                 int divisionId = rs.getInt("Division_ID");
                 String division = rs.getString("Division");
                 int countryId = rs.getInt("Country_ID");
-                State s = new State(divisionId, division, countryId);
+                Division s = new Division(divisionId, division, countryId);
                 slist.add(s);
             }
         }

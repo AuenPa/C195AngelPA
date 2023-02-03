@@ -18,8 +18,11 @@ import model.Appointment;
 import model.User;
 import util.DBAppointments;
 import util.DBUsers;
+import util.UserInterface;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -62,13 +65,22 @@ public class UserController implements Initializable {
     @FXML
     public void loginToAppointments(ActionEvent event) throws IOException {
 
+        String logger = "login_activity.txt";
+        FileWriter fWriter = new FileWriter(logger, true);
+        PrintWriter outFile = new PrintWriter(fWriter);
+
         ObservableList<User> userList = DBUsers.getAllUsers();
         if( (userList.get(0).getUserName().equals(userName.getText())
             && userList.get(0).getPassword().equals(passWord.getText())) || (userList.get(1).getUserName().equals(userName.getText()) && userList.get(1).getPassword().equals(passWord.getText())) ) {
 
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
+
+            String userNameAttemptSuccess = userName.getText() + " successfully logged in on " + LocalDate.now() + " at " + dtf.format(LocalTime.now());
+            outFile.println(userNameAttemptSuccess);
+
+
             int count = 0;
             for(Appointment a : DBAppointments.getAllAppointments()) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
                 LocalDateTime startLDT = LocalDateTime.of(a.getStartDate(), a.getStartTimeT());
                 LocalDateTime currentLDT = LocalDateTime.now();
                 long LDTDifference = ChronoUnit.MINUTES.between(currentLDT, startLDT);
@@ -133,8 +145,13 @@ public class UserController implements Initializable {
                 wrongLoginCreds.setContentText("Username or password entered incorrectly");
                 wrongLoginCreds.showAndWait();
             }
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
+
+            String userNameAttemptFail = userName.getText() + " failed to login on " + LocalDate.now() + " at " + dtf.format(LocalTime.now());
+            outFile.println(userNameAttemptFail);
         }
 
+        outFile.close();
 
     }
 
@@ -142,7 +159,11 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId localZoneID = ZoneId.of(TimeZone.getDefault().getID());
-        String zoneString = localZoneID.toString();
+
+        UserInterface zoneToString = zoneId -> zoneId.toString();
+        String zoneString = zoneToString.getMessage(localZoneID);
+
+        //String zoneString = localZoneID.toString();
         localZone.setText(zoneString);
 
         //ResourceBundle rb = ResourceBundle.getBundle("util/Lang_fr", Locale.getDefault());

@@ -14,8 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Country;
-import model.Customer;
-import model.State;
+import model.Division;
 import util.DBCountry;
 import util.DBCustomers;
 import util.DBState;
@@ -43,12 +42,12 @@ public class AddCustomerController implements Initializable {
     private TextField postalCode;
 
     @FXML
-    private ComboBox<State> stateComboBox;
+    private ComboBox<Division> divisionComboBox;
 
     @FXML
     private ComboBox<Country> countryComboBox;
 
-    private ObservableList<State> stateFiltered = FXCollections.observableArrayList();
+    private ObservableList<Division> divisionFiltered = FXCollections.observableArrayList();
 
     @FXML
     public void cancelAddCustomer(ActionEvent event) throws IOException {
@@ -62,7 +61,7 @@ public class AddCustomerController implements Initializable {
 
     @FXML
     public void saveAddCustomer(ActionEvent event) throws IOException {
-        if(customerName.getText().isBlank() || address.getText().isBlank() || postalCode.getText().isBlank() || phoneNumber.getText().isBlank() || stateComboBox.getValue() == null) {
+        if(customerName.getText().isBlank() || address.getText().isBlank() || postalCode.getText().isBlank() || phoneNumber.getText().isBlank() || divisionComboBox.getValue() == null) {
             Alert emptyFields = new Alert(Alert.AlertType.ERROR);
             emptyFields.setTitle("Empty field(s)");
             emptyFields.setContentText("Fill out all field(s)");
@@ -70,7 +69,7 @@ public class AddCustomerController implements Initializable {
         }
         else {
             DBCustomers.addCustomer(customerName.getText(), address.getText(), postalCode.getText(),
-                    phoneNumber.getText(), stateComboBox.getSelectionModel().getSelectedItem().getDivisionId());
+                    phoneNumber.getText(), divisionComboBox.getSelectionModel().getSelectedItem().getDivisionId());
             //Customer.addCustomerCM();
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
@@ -101,37 +100,37 @@ public class AddCustomerController implements Initializable {
         Country getItemSelected = countryComboBox.getSelectionModel().getSelectedItem();
         if(getItemSelected.getCountryId() == 1 && getItemSelected != null) {
             //Clears out observablelist of states
-            stateFiltered.clear();
+            divisionFiltered.clear();
             //Sets combobox with cleared out observablelist of states
             //This is so the same states are not added again
-            stateComboBox.setItems(stateFiltered);
-            for(State s : DBState.getAllStates()) {
+            divisionComboBox.setItems(divisionFiltered);
+            for(Division s : DBState.getAllStates()) {
                 if(s.getCountryId() == 1) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            divisionComboBox.setItems(divisionFiltered);
         }
 
         else if(getItemSelected.getCountryId() == 2) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
-            for(State s :DBState.getAllStates()) {
+            divisionFiltered.clear();
+            divisionComboBox.setItems(divisionFiltered);
+            for(Division s :DBState.getAllStates()) {
                 if(s.getCountryId() == 2) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            divisionComboBox.setItems(divisionFiltered);
         }
         else if(getItemSelected.getCountryId() == 3) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
-            for(State s : DBState.getAllStates()) {
+            divisionFiltered.clear();
+            divisionComboBox.setItems(divisionFiltered);
+            for(Division s : DBState.getAllStates()) {
                 if(s.getCountryId() == 3) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            divisionComboBox.setItems(divisionFiltered);
         }
 
         /*

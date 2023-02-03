@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
-import model.State;
+import model.Division;
 import util.DBCountry;
 import util.DBCustomers;
 import util.DBState;
@@ -42,7 +42,7 @@ public class UpdateCustomerController implements Initializable {
     private TextField postalCode;
 
     @FXML
-    private ComboBox<State> stateComboBox;
+    private ComboBox<Division> stateComboBox;
 
     @FXML
     private ComboBox<Country> countryComboBox;
@@ -53,11 +53,11 @@ public class UpdateCustomerController implements Initializable {
         sentCustomer = customer;
     }
 
-    private State sentCustomerState;
+    private Division sentCustomerDivision;
 
     private Country sentCustomerCountry;
 
-    private ObservableList<State> stateFiltered = FXCollections.observableArrayList();
+    private ObservableList<Division> divisionFiltered = FXCollections.observableArrayList();
 
 
 
@@ -65,7 +65,7 @@ public class UpdateCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //probably don't need this
-        ObservableList<State> slist = DBState.getAllStates();
+        ObservableList<Division> slist = DBState.getAllStates();
         stateComboBox.setItems(slist);
 
         ObservableList<Country> clist = DBCountry.getAllCountries();
@@ -79,53 +79,53 @@ public class UpdateCustomerController implements Initializable {
         //countryComboBox.setItems(sentCustomer.);
         int stateID = sentCustomer.getDivisionId();
         //State sentCustomerState = null;
-        for(State S : DBState.getAllStates()) {
+        for(Division S : DBState.getAllStates()) {
             if(S.getDivisionId() == stateID) {
-                sentCustomerState = S;
+                sentCustomerDivision = S;
                 break;
             }
         }
-        stateComboBox.setValue(sentCustomerState);
+        stateComboBox.setValue(sentCustomerDivision);
 
 
         for(Country C : DBCountry.getAllCountries()) {
-            if(C.getCountryId() == sentCustomerState.getCountryId()) {
+            if(C.getCountryId() == sentCustomerDivision.getCountryId()) {
                 sentCustomerCountry = C;
             }
         }
         countryComboBox.setValue(sentCustomerCountry);
 
         if(sentCustomerCountry.getCountryId() == 1) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
+            divisionFiltered.clear();
+            stateComboBox.setItems(divisionFiltered);
 
-            for(State S : DBState.getAllStates()) {
+            for(Division S : DBState.getAllStates()) {
                 if(S.getCountryId() == 1) {
-                    stateFiltered.add(S);
+                    divisionFiltered.add(S);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            stateComboBox.setItems(divisionFiltered);
         }
 
         else if(sentCustomerCountry.getCountryId() == 2) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
-            for(State s :DBState.getAllStates()) {
+            divisionFiltered.clear();
+            stateComboBox.setItems(divisionFiltered);
+            for(Division s :DBState.getAllStates()) {
                 if(s.getCountryId() == 2) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            stateComboBox.setItems(divisionFiltered);
         }
         else if(sentCustomerCountry.getCountryId() == 3) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
-            for(State s : DBState.getAllStates()) {
+            divisionFiltered.clear();
+            stateComboBox.setItems(divisionFiltered);
+            for(Division s : DBState.getAllStates()) {
                 if(s.getCountryId() == 3) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            stateComboBox.setItems(divisionFiltered);
         }
 
     }
@@ -166,37 +166,37 @@ public class UpdateCustomerController implements Initializable {
         Country getItemSelected = countryComboBox.getSelectionModel().getSelectedItem();
         if(getItemSelected.getCountryId() == 1 && getItemSelected != null) {
             //Clears out observablelist of states
-            stateFiltered.clear();
+            divisionFiltered.clear();
             //Sets combobox with cleared out observablelist of states
             //This is so the same states are not added again
-            stateComboBox.setItems(stateFiltered);
-            for(State s : DBState.getAllStates()) {
+            stateComboBox.setItems(divisionFiltered);
+            for(Division s : DBState.getAllStates()) {
                 if(s.getCountryId() == 1) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            stateComboBox.setItems(divisionFiltered);
         }
 
         else if(getItemSelected.getCountryId() == 2) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
-            for(State s :DBState.getAllStates()) {
+            divisionFiltered.clear();
+            stateComboBox.setItems(divisionFiltered);
+            for(Division s :DBState.getAllStates()) {
                 if(s.getCountryId() == 2) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            stateComboBox.setItems(divisionFiltered);
         }
         else if(getItemSelected.getCountryId() == 3) {
-            stateFiltered.clear();
-            stateComboBox.setItems(stateFiltered);
-            for(State s : DBState.getAllStates()) {
+            divisionFiltered.clear();
+            stateComboBox.setItems(divisionFiltered);
+            for(Division s : DBState.getAllStates()) {
                 if(s.getCountryId() == 3) {
-                    stateFiltered.add(s);
+                    divisionFiltered.add(s);
                 }
             }
-            stateComboBox.setItems(stateFiltered);
+            stateComboBox.setItems(divisionFiltered);
         }
     }
 
