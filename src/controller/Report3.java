@@ -17,7 +17,7 @@ import model.Customer;
 import model.Division;
 import util.DBCountry;
 import util.DBCustomers;
-import util.DBState;
+import util.DBDivision;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +56,7 @@ public class Report3 implements Initializable {
             //Sets combobox with cleared out observablelist of states
             //This is so the same states are not added again
             DivisionCB.setItems(divisionFiltered);
-            for(Division s : DBState.getAllStates()) {
+            for(Division s : DBDivision.getAllDivisions()) {
                 if(s.getCountryId() == 1) {
                     divisionFiltered.add(s);
                 }
@@ -67,7 +67,7 @@ public class Report3 implements Initializable {
         else if(getItemSelected.getCountryId() == 2) {
             divisionFiltered.clear();
             DivisionCB.setItems(divisionFiltered);
-            for(Division s :DBState.getAllStates()) {
+            for(Division s : DBDivision.getAllDivisions()) {
                 if(s.getCountryId() == 2) {
                     divisionFiltered.add(s);
                 }
@@ -77,7 +77,7 @@ public class Report3 implements Initializable {
         else if(getItemSelected.getCountryId() == 3) {
             divisionFiltered.clear();
             DivisionCB.setItems(divisionFiltered);
-            for(Division s : DBState.getAllStates()) {
+            for(Division s : DBDivision.getAllDivisions()) {
                 if(s.getCountryId() == 3) {
                     divisionFiltered.add(s);
                 }

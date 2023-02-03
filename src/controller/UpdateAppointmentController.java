@@ -26,9 +26,13 @@ import util.DBUsers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.time.*;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
@@ -156,22 +160,31 @@ public class UpdateAppointmentController implements Initializable {
         ZonedDateTime currentLocalTime = addStartCombine.atZone(localTZone);
         ZonedDateTime currentEasternTime = currentLocalTime.withZoneSameInstant(eastT);
         LocalDateTime zonedEastToLDT = currentEasternTime.toLocalDateTime();
+        LocalTime easternTimeFormat = LocalTime.from(zonedEastToLDT);
 
         ZonedDateTime currentLocalTimeE = addEndCombine.atZone(localTZone);
         ZonedDateTime currentEasternTimeE = currentLocalTimeE.withZoneSameInstant(eastT);
         LocalDateTime zonedEastToLDTE = currentEasternTimeE.toLocalDateTime();
+        LocalTime easternTimeFormatEnd = LocalTime.from(zonedEastToLDTE);
 
 
         if( !(checkStart && checkEnd) ) {
+
+            //"\nYour current time is " + dtf.format(LocalTime.now())
+            //"\nYour current time is " + dateFormat.format(new Date())
+            //"\nEST is " + dtf.format(LocalTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")));
+            DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.US);
+            DateTimeFormatter testDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(ZoneId.systemDefault());
+            DateTimeFormatter easternDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(eastT);
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
             Alert outsideHours = new Alert(Alert.AlertType.ERROR);
             outsideHours.setTitle("Invalid Appointment Hours");
             String SB = "Business hours between 8am - 10pm est\n" +
-                    "\nYour start time in est is " + zonedEastToLDT +
-                    "\nYour end time in est is " + zonedEastToLDTE +
-                    "\nYour current time is " + dtf.format(LocalTime.now()) +
-                    "\nEST is " + dtf.format(LocalTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")));
+                    "\nYour start time in est is " + easternDTF.format(easternTimeFormat) +
+                    "\nYour end time in est is " + easternDTF.format(easternTimeFormatEnd) +
+                    "\nYour current time is " + testDTF.format(LocalTime.now()) +
+                    "\nEST is " + easternDTF.format(LocalTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")));
             outsideHours.setContentText(SB);
             outsideHours.showAndWait();
         }

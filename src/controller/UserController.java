@@ -29,6 +29,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -73,9 +74,9 @@ public class UserController implements Initializable {
         if( (userList.get(0).getUserName().equals(userName.getText())
             && userList.get(0).getPassword().equals(passWord.getText())) || (userList.get(1).getUserName().equals(userName.getText()) && userList.get(1).getPassword().equals(passWord.getText())) ) {
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
+            DateTimeFormatter testDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(ZoneId.systemDefault());
 
-            String userNameAttemptSuccess = userName.getText() + " successfully logged in on " + LocalDate.now() + " at " + dtf.format(LocalTime.now());
+            String userNameAttemptSuccess = userName.getText() + " successfully logged in on " + LocalDate.now() + " at " + testDTF.format(LocalTime.now());
             outFile.println(userNameAttemptSuccess);
 
 
@@ -90,12 +91,12 @@ public class UserController implements Initializable {
 
                     if(Locale.getDefault().getLanguage().equals("fr")) {
                         appointmentUpcoming.setTitle(rb.getString("Appointment_Coming_Up"));
-                        appointmentUpcoming.setContentText(rb.getString("appointment_in") + LDTDifference + " " + rb.getString("minsAppId") + a.getAppointmentId() + rb.getString("date") + a.getStartDate() + rb.getString("time") + a.getStartTimeT());
+                        appointmentUpcoming.setContentText(rb.getString("appointment_in") + LDTDifference + " " + rb.getString("minsAppId") + a.getAppointmentId() + rb.getString("date") + a.getStartDate() + rb.getString("time") + testDTF.format(a.getStartTimeT()));
                         appointmentUpcoming.showAndWait();
                     }
                     else {
                         appointmentUpcoming.setTitle("Appointment Coming up");
-                        appointmentUpcoming.setContentText("You have an appointment in " + LDTDifference + " minute(s)\nAppointment ID: " + a.getAppointmentId() + "\nDate: " + a.getStartDate() + "\nTime: " + a.getStartTimeT());
+                        appointmentUpcoming.setContentText("You have an appointment in " + LDTDifference + " minute(s)\nAppointment ID: " + a.getAppointmentId() + "\nDate: " + a.getStartDate() + "\nTime: " + testDTF.format(a.getStartTimeT()));
                         appointmentUpcoming.showAndWait();
                     }
                     count++;
@@ -145,9 +146,9 @@ public class UserController implements Initializable {
                 wrongLoginCreds.setContentText("Username or password entered incorrectly");
                 wrongLoginCreds.showAndWait();
             }
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
+            DateTimeFormatter testDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(ZoneId.systemDefault());
 
-            String userNameAttemptFail = userName.getText() + " failed to login on " + LocalDate.now() + " at " + dtf.format(LocalTime.now());
+            String userNameAttemptFail = userName.getText() + " failed to login on " + LocalDate.now() + " at " + testDTF.format(LocalTime.now());
             outFile.println(userNameAttemptFail);
         }
 

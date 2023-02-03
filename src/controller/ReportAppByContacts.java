@@ -158,8 +158,13 @@ public class ReportAppByContacts implements Initializable {
     }
 
     @FXML
-    public void toggleToReports3(ActionEvent event) {
-
+    public void toggleToReports3(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Report3.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 600, 400);
+        //stage.setTitle("From appointment menu to update appointment");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

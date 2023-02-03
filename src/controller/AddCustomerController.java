@@ -17,7 +17,7 @@ import model.Country;
 import model.Division;
 import util.DBCountry;
 import util.DBCustomers;
-import util.DBState;
+import util.DBDivision;
 
 
 import java.io.IOException;
@@ -70,7 +70,6 @@ public class AddCustomerController implements Initializable {
         else {
             DBCustomers.addCustomer(customerName.getText(), address.getText(), postalCode.getText(),
                     phoneNumber.getText(), divisionComboBox.getSelectionModel().getSelectedItem().getDivisionId());
-            //Customer.addCustomerCM();
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -87,11 +86,7 @@ public class AddCustomerController implements Initializable {
 
         ObservableList<Country> countries = DBCountry.getAllCountries();
         countryComboBox.setItems(countries);
-/*
-        ObservableList<State> states = DBState.getAllStates();
-        stateComboBox.setItems(states);
 
- */
     }
 
     @FXML
@@ -104,7 +99,7 @@ public class AddCustomerController implements Initializable {
             //Sets combobox with cleared out observablelist of states
             //This is so the same states are not added again
             divisionComboBox.setItems(divisionFiltered);
-            for(Division s : DBState.getAllStates()) {
+            for(Division s : DBDivision.getAllDivisions()) {
                 if(s.getCountryId() == 1) {
                     divisionFiltered.add(s);
                 }
@@ -115,7 +110,7 @@ public class AddCustomerController implements Initializable {
         else if(getItemSelected.getCountryId() == 2) {
             divisionFiltered.clear();
             divisionComboBox.setItems(divisionFiltered);
-            for(Division s :DBState.getAllStates()) {
+            for(Division s : DBDivision.getAllDivisions()) {
                 if(s.getCountryId() == 2) {
                     divisionFiltered.add(s);
                 }
@@ -125,7 +120,7 @@ public class AddCustomerController implements Initializable {
         else if(getItemSelected.getCountryId() == 3) {
             divisionFiltered.clear();
             divisionComboBox.setItems(divisionFiltered);
-            for(Division s : DBState.getAllStates()) {
+            for(Division s : DBDivision.getAllDivisions()) {
                 if(s.getCountryId() == 3) {
                     divisionFiltered.add(s);
                 }
@@ -133,19 +128,10 @@ public class AddCustomerController implements Initializable {
             divisionComboBox.setItems(divisionFiltered);
         }
 
-        /*
-        for(Country c : DBCountry.getAllCountries()) {
-            if(countryComboBox.getSelectionModel().getSelectedItem().equals(c)){
-                int checkCountryId = c.getCountryId();
-            }
-
-        }
-
-         */
     }
 
     @FXML
-    public void onComboSelectState(ActionEvent event) {
+    public void onComboSelectDivision(ActionEvent event) {
 
     }
 

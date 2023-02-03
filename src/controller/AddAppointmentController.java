@@ -166,20 +166,24 @@ public class AddAppointmentController implements Initializable {
             ZonedDateTime currentLocalTime = LocalDateTime.of(startDatePicker.getValue(), startTimeCB.getValue()).atZone(localTZone);
             ZonedDateTime currentEasternTime = currentLocalTime.withZoneSameInstant(eastT);
             LocalDateTime zonedEastToLDT = currentEasternTime.toLocalDateTime();
+            LocalTime easternTimeFormat = LocalTime.from(zonedEastToLDT);
 
             ZonedDateTime currentLocalTimeE = LocalDateTime.of(startDatePicker.getValue(), endTimeCB.getValue()).atZone(localTZone);
             ZonedDateTime currentEasternTimeE = currentLocalTimeE.withZoneSameInstant(eastT);
             LocalDateTime zonedEastToLDTE = currentEasternTimeE.toLocalDateTime();
+            LocalTime easternTimeFormatEnd = LocalTime.from(zonedEastToLDTE);
 
+            DateTimeFormatter testDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(ZoneId.systemDefault());
+            DateTimeFormatter easternDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(eastT);
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
             Alert outsideHours = new Alert(Alert.AlertType.ERROR);
             outsideHours.setTitle("Invalid Appointment Hours");
             String SB = "Business hours between 8am - 10pm est\n" +
-                    "\nYour start time in est is " + zonedEastToLDT +
-                    "\nYour end time in est is " + zonedEastToLDTE +
-                    "\nYour current time is " + dtf.format(LocalTime.now()) +
-                    "\nEST is " + dtf.format(LocalTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")));
+                    "\nYour start time in est is " + easternDTF.format(easternTimeFormat) +
+                    "\nYour end time in est is " + easternDTF.format(easternTimeFormatEnd) +
+                    "\nYour current time is " + testDTF.format(LocalTime.now()) +
+                    "\nEST is " + easternDTF.format(LocalTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")));
             outsideHours.setContentText(SB);
             outsideHours.showAndWait();
         }

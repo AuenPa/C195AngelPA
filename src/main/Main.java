@@ -26,13 +26,6 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
 
         //Locale.setDefault(new Locale("fr"));
-        //ResourceBundle rb = ResourceBundle.getBundle("util/Lang", Locale.getDefault());
-/*
-        if(Locale.getDefault().getLanguage().equals("fr")) {
-            System.out.println(rb.getString("hello") + " " + rb.getString("world"));
-        }
- */
-
         JDBC.openConnection();
 
         launch(args);

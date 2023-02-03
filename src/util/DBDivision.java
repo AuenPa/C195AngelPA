@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBState {
+public class DBDivision {
 
-    public static ObservableList<Division> getAllStates() {
+    public static ObservableList<Division> getAllDivisions() {
         ObservableList<Division> slist = FXCollections.observableArrayList();
 
 
