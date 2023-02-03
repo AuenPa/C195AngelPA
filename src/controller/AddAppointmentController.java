@@ -18,10 +18,7 @@ import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
-import util.DBAppointments;
-import util.DBContacts;
-import util.DBCustomers;
-import util.DBUsers;
+import util.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -137,7 +134,9 @@ public class AddAppointmentController implements Initializable {
         //int addUserId = userIdCB.getValue();
 
         for (Contact c : DBContacts.getAllContacts()) {
-            if (c.getContactName().equals(contactNameComboBox.getValue())) {
+            AddAppointmentInterface contactCheck = s -> c.getContactName().equals(s);
+            //c.getContactName().equals(contactNameComboBox.getValue())
+            if (contactCheck.checkContact(contactNameComboBox.getValue())) {
                 getContactId = c.getContactId();
                 break;
             }
