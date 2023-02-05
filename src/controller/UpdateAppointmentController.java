@@ -35,53 +35,106 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for updating appointments. These updates are reflected in the database.
+ */
 public class UpdateAppointmentController implements Initializable {
 
-
+    /**
+     * TextField used to send the same appointment ID for the appointment being updated.
+     */
     @FXML
     private TextField appointmentID;
 
+    /**
+     * ComboBox for appointment contact names.
+     */
     @FXML
     private ComboBox<String> contactNameComboBox;
 
+    /**
+     * ComboBox for appointment customer IDs.
+     */
     @FXML
     private ComboBox<Integer> customerIdCB;
 
+    /**
+     * TextField for the description of the appointment.
+     */
     @FXML
     private TextField descriptionTF;
 
+    /**
+     * ComboBox for the appointments end time.
+     */
     @FXML
     private ComboBox<LocalTime> endTimeCB;
 
+    /**
+     * TextField for the appointments location.
+     */
     @FXML
     private TextField locationTF;
 
+    /**
+     * DatePicker for the appointment start and end date.
+     */
     @FXML
     private DatePicker startDatePicker;
 
+    /**
+     * ComboBox for the appointments start time.
+     */
     @FXML
     private ComboBox<LocalTime> startTimeCB;
 
+    /**
+     * TextField for the appointments title.
+     */
     @FXML
     private TextField titleTF;
 
+    /**
+     * TextField for the type of appointment
+     */
     @FXML
     private TextField typeTF;
 
+    /**
+     * ComboBox for choosing the user ID for the appointment.
+     */
     @FXML
     private ComboBox<Integer> userIdCB;
 
+    /**
+     * Used to add the contact ID to the database when it is chosen from the contact contact name combobox.
+     */
     private int getContactId;
 
+    /**
+     * Used to store the selected appointment that is passed to be modified.
+     */
     private static Appointment appToModify;
 
+    /**
+     * Used to be called in the appointment controllers to pass the selected appointment to be modified.
+     * @param appointment the appointment, selected in the appointment tables, to be modified
+     */
     public static void passAppointment (Appointment appointment) {
         appToModify = appointment;
     }
 
+    /**
+     * Used to fill the start and end time comboboxes.
+     */
     private LocalTime addLocalTimes = LocalTime.of(4, 0);
 
-
+    /**
+     * Populates the fields, comboboxes, and datepicker with the appropriate data from the appointment instance that is passed.
+     * Sets the comboboxes for contact names, start and end times, customer and user IDs for selection.
+     * @param url No usage for this method
+     * @param resourceBundle No usage for this method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> contactNames = FXCollections.observableArrayList();
@@ -122,6 +175,11 @@ public class UpdateAppointmentController implements Initializable {
         contactNameComboBox.setValue(appToModify.getContactName());
     }
 
+    /**
+     * Cancels the modification of the appointment when Cancel is clicked.
+     * @param event not used
+     * @throws IOException
+     */
     @FXML
     public void cancelModifyAppointment(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
@@ -132,6 +190,13 @@ public class UpdateAppointmentController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Saves the modified appointment when Save is clicked.
+     * The modified appointment instance is put into the database without an altered duplication.
+     * Uses other methods to ensure the data being saved is valid, sends an alert indicating if otherwise.
+     * @param event no use
+     * @throws IOException
+     */
     @FXML
     public void saveModifyAppointment(ActionEvent event) throws IOException {
 
@@ -167,17 +232,12 @@ public class UpdateAppointmentController implements Initializable {
         LocalDateTime zonedEastToLDTE = currentEasternTimeE.toLocalDateTime();
         LocalTime easternTimeFormatEnd = LocalTime.from(zonedEastToLDTE);
 
-
+        //Conditional statements to ensure the data provided is valid and there are no empty TextFields or CombobBoxes
         if( !(checkStart && checkEnd) ) {
 
-            //"\nYour current time is " + dtf.format(LocalTime.now())
-            //"\nYour current time is " + dateFormat.format(new Date())
-            //"\nEST is " + dtf.format(LocalTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")));
-            DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.US);
             DateTimeFormatter testDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(ZoneId.systemDefault());
             DateTimeFormatter easternDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.LONG).withZone(eastT);
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
             Alert outsideHours = new Alert(Alert.AlertType.ERROR);
             outsideHours.setTitle("Invalid Appointment Hours");
             String SB = "Business hours between 8am - 10pm est\n" +
@@ -221,6 +281,13 @@ public class UpdateAppointmentController implements Initializable {
         }
     }
 
+    /**
+     * Takes the times selected and returns false if the hours are outside of business hours.
+     * Using eastern time, the business hours are set from 8am - 10 pm and checks if the time chosen for the
+     * appointment is in this time block.
+     * @param timeToCheck this will be the start and/or end time chosen
+     * @return false or true if the hours selected are within business hours
+     */
     public static boolean businessHoursCompare(LocalDateTime timeToCheck) {
         ZoneId eastT = ZoneId.of("America/New_York");
         ZoneId localTZone = ZoneId.systemDefault();
@@ -230,15 +297,22 @@ public class UpdateAppointmentController implements Initializable {
         LocalDateTime zonedEastToLDT = currentEasternTime.toLocalDateTime();
 
         ZonedDateTime eastStart = ZonedDateTime.of(currentEasternTime.toLocalDate(), LocalTime.of(8,0), eastT);
-        //System.out.println("eastern zoned start time" + eastStart + " " + eastStart.toLocalDateTime());
 
         ZonedDateTime eastEnd = ZonedDateTime.of(currentEasternTime.toLocalDate(), LocalTime.of(22,0), eastT);
-        //System.out.println("eastern zoned end time " + eastEnd + " " + eastEnd.toLocalDateTime());
 
         return ( zonedEastToLDT.isAfter(ChronoLocalDateTime.from(eastStart)) || zonedEastToLDT.equals(ChronoLocalDateTime.from(eastStart)) )
                 && ( zonedEastToLDT.isBefore(ChronoLocalDateTime.from(eastEnd)) || zonedEastToLDT.equals(ChronoLocalDateTime.from(eastEnd)));
     }
 
+    /**
+     * Checks if the time selected is in conflict with another appointment for the same customer.
+     * Ensures that the method does not compare the selected appointment with the appointment in the
+     * database. This would always cause the method to return a false if it is not checked for.
+     * Checks whether the start time is within the time window of another appointment.
+     * Also checks if the end time is within the time window of another appointment.
+     * And checks if the new appointment time is equal to or is greater in time to another appointment listed.
+     * @return true or false if the time conflicts with another appointment time window
+     */
     public boolean timeConflicts() {
         for(Appointment a : DBAppointments.getAllAppointments()) {
             if(a.getAssocCustomerId() == customerIdCB.getValue()) {

@@ -92,6 +92,11 @@ public class AppointmentsMenuController implements Initializable {
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 DBAppointments.deleteAppointment(SA.getAppointmentId());
                 appointmentTable.setItems(DBAppointments.getAllAppointments());
+                Alert deleteComplete = new Alert(Alert.AlertType.INFORMATION);
+                deleteComplete.setTitle("Appointment Cancelled");
+                deleteComplete.setContentText("Appointment number " + SA.getAppointmentId() + " of type " + SA.getType() + " has been cancelled");
+                deleteComplete.setHeaderText("Cancellation");
+                deleteComplete.showAndWait();
             }
         }
         catch (SQLException | NullPointerException e) {

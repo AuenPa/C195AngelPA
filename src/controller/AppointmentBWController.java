@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
+import util.AppointmentByWeek;
 import util.DBAppointments;
 
 import java.io.IOException;
@@ -136,8 +137,10 @@ public class AppointmentBWController implements Initializable {
             //Need to make localdatetime of appointment a to get appointment week number *MAYBE NOT AFTER ALL*
             LocalDateTime appLDT = LocalDateTime.of(a.getStartDate(),a.getStartTimeT());
             TemporalField appointmentWeek = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+            AppointmentByWeek compareMonth = m -> a.getStartDate().getMonth() == m;
+            //boolean check1 = compareMonth.compareMonth(LocalDate.now().getMonth());
             int appWeekNum = a.getStartDate().get(appointmentWeek);
-            if(a.getStartDate().getMonth() == LocalDate.now().getMonth() &&
+            if(compareMonth.compareMonth(LocalDate.now().getMonth()) &&
                     a.getStartDate().getYear() == LocalDate.now().getYear() &&
                     appWeekNum == presentWeekOfYear
                ) {

@@ -18,7 +18,6 @@ import model.Appointment;
 import model.User;
 import util.DBAppointments;
 import util.DBUsers;
-import util.UserInterface;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -160,14 +159,8 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId localZoneID = ZoneId.of(TimeZone.getDefault().getID());
-
-        UserInterface zoneToString = zoneId -> zoneId.toString();
-        String zoneString = zoneToString.getMessage(localZoneID);
-
-        //String zoneString = localZoneID.toString();
+        String zoneString = localZoneID.toString();
         localZone.setText(zoneString);
-
-        //ResourceBundle rb = ResourceBundle.getBundle("util/Lang_fr", Locale.getDefault());
 
         if(Locale.getDefault().getLanguage().equals("fr")) {
             usernameLabel.setText(rb.getString("Username"));
