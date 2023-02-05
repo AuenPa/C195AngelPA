@@ -22,7 +22,6 @@ import util.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.chrono.ChronoLocalDateTime;
@@ -140,8 +139,6 @@ public class AddAppointmentController implements Initializable {
 
     /**
      * Cancels the scheduling of the appointment when Cancel is clicked.
-     * @param event not used
-     * @throws IOException
      */
     @FXML
     public void cancelAddAppointment(ActionEvent event) throws IOException {
@@ -162,8 +159,6 @@ public class AddAppointmentController implements Initializable {
      * contact name ComboBox is equal to a contact in the database. The ID of the contact is stored
      * when the names match and is used as an attribute to be stored in the new instance.
      * </p>
-     * @param event no use
-     * @throws IOException
      */
     @FXML
     public void saveAddAppointment(ActionEvent event) throws IOException {

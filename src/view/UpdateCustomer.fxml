@@ -23,7 +23,7 @@
         <TextField fx:id="phoneNumber" layoutX="197.0" layoutY="234.0" />
         <ComboBox fx:id="countryComboBox" layoutX="197.0" layoutY="275.0" onAction="#onComboSelectCountry" prefWidth="150.0" />
         <Label layoutX="395.0" layoutY="279.0" text="Division" />
-        <ComboBox fx:id="divisionComboBox" layoutX="461.0" layoutY="275.0" onAction="#onComboSelectState" prefWidth="150.0" />
+        <ComboBox fx:id="divisionComboBox" layoutX="461.0" layoutY="275.0" prefWidth="150.0" />
         <Label layoutX="314.0" layoutY="31.0" text="Update Customer" />
     </children>
 </AnchorPane>

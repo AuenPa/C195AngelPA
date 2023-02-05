@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
@@ -31,56 +28,90 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentBWController implements Initializable {
-    @FXML
-    private RadioButton allAppointmentRB;
 
-    @FXML
-    private RadioButton appointmentMonthRB;
-
-    @FXML
-    private RadioButton appointmentWeekRB;
-
-    @FXML
-    private RadioButton customerRB;
-
+    /**
+     * TableColumn for the appointment ID.
+     */
     @FXML
     private TableColumn<Appointment, Integer> appointmentIdCol;
 
+    /**
+     * TableColumn for the descriptions.
+     */
     @FXML
     private TableColumn<Appointment, String> descriptionCol;
 
+    /**
+     * TableView for the appointments.
+     */
     @FXML
     private TableView<Appointment> appointmentTable;
 
+    /**
+     * TableColumn for the contact names.
+     */
     @FXML
     private TableColumn<Appointment, Integer> contactNameCol;
 
+    /**
+     * TableColumn for the customer ID.
+     */
     @FXML
     private TableColumn<Appointment, Integer> customerIdCol;
 
+    /**
+     * TableColumn for the end times.
+     */
     @FXML
     private TableColumn<Appointment, LocalTime> endTimeCol;
 
+    /**
+     * TableColumn for the locations.
+     */
     @FXML
     private TableColumn<Appointment, String> locationCol;
 
+    /**
+     * TableColumn for the start date.
+     */
     @FXML
     private TableColumn<Appointment, LocalDate> startDateCol;
 
+    /**
+     * TableColumn for the start times.
+     */
     @FXML
     private TableColumn<Appointment, LocalTime> startTimeCol;
 
+    /**
+     * TableColumn for the titles.
+     */
     @FXML
     private TableColumn<Appointment, String> titleCol;
 
+    /**
+     * TableColumn for the type.
+     */
     @FXML
     private TableColumn<Appointment, String> typeCol;
 
+    /**
+     * TableColumn for the user ID.
+     */
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
 
+    /**
+     * The appointment instance that is selected to be deleted.
+     */
     private Appointment SA;
 
+    /**
+     * Deletes the appointment from the table as well as from the database.
+     * The selected appointment is deleted but not before an alert is shown asking if this is what the user wants done.
+     * If the appointment is chosen for deletion, another alert is shown right after informing the details of the appointment that was deleted.
+     * If the delete button is clicked when no appointment is selected, there is an error alert stating that nothing was selected to delete.
+     */
     @FXML
     public void deleteAppointment(ActionEvent event) {
         try {
@@ -104,20 +135,16 @@ public class AppointmentBWController implements Initializable {
             }
             e.printStackTrace();
         }
-        //appointmentTable.setItems(DBAppointments.getAllAppointments());
     }
 
+    /**
+     * Filters through the appointments by the week of the year as well as setting those appointments on the table.
+     * Using the WeekFields class, the appointments are filtered by current week of the year.
+     * This produces a list of appointments that are within the current week which are then set on the table.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //CHANGE MONTH TO WEEK ON OBSERVABLELIST OF APPOINTMENTS
-        //appointmentTable.setItems(DBAppointments.getAllAppointments());
         ObservableList<Appointment> filterAppsByWeekList = FXCollections.observableArrayList();
-
-        ZoneId z = ZoneId.systemDefault();
-        LocalDate today = LocalDate.now(z);
-        int wOfWBasedY = today.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-        int wOfY = today.get(IsoFields.WEEK_BASED_YEAR);
-        String todayWeekISO = wOfY + "-W" + String.format("%02d", wOfWBasedY);
 
         //Instead of using IsoFields, use WeekFields
         //I tried using them a while back but they did not register
@@ -128,31 +155,16 @@ public class AppointmentBWController implements Initializable {
         int presentWeekOfYear = todaysDate.get(currentWeekOfYear);
 
         for(Appointment a : DBAppointments.getAllAppointments()) {
-            /*
-            LocalDate fromDBAppointment = a.getStartDate();
-            int fromDBAppWWBY = fromDBAppointment.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-            int fromDBAppWY = fromDBAppointment.get(IsoFields.WEEK_BASED_YEAR);
-            String compareFromDBApps = fromDBAppWY + "-W" + String.format("%02d", fromDBAppWWBY);
-             */
-            //Need to make localdatetime of appointment a to get appointment week number *MAYBE NOT AFTER ALL*
-            LocalDateTime appLDT = LocalDateTime.of(a.getStartDate(),a.getStartTimeT());
             TemporalField appointmentWeek = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
             AppointmentByWeek compareMonth = m -> a.getStartDate().getMonth() == m;
-            //boolean check1 = compareMonth.compareMonth(LocalDate.now().getMonth());
             int appWeekNum = a.getStartDate().get(appointmentWeek);
             if(compareMonth.compareMonth(LocalDate.now().getMonth()) &&
                     a.getStartDate().getYear() == LocalDate.now().getYear() &&
                     appWeekNum == presentWeekOfYear
                ) {
                 filterAppsByWeekList.add(a);
-                //System.out.println(appWeekNum);
             }
-            //System.out.println(appWeekNum);
         }
-
-
-        //System.out.println(presentWeekOfYear);
-
         appointmentTable.setItems(filterAppsByWeekList);
 
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
@@ -166,12 +178,11 @@ public class AppointmentBWController implements Initializable {
         endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTimeT"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("assocCustomerId"));
-
-
-        //appointmentMonthRB.setSelected(true);
-        //allAppointmentRB.setSelected(false);
     }
 
+    /**
+     * Switches to the all appointments screen.
+     */
     @FXML
     public void toggleToAllAppo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
@@ -182,6 +193,9 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to appointments by month screen.
+     */
     @FXML
     public void toggleToAppoMonth(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
@@ -192,11 +206,9 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    public void toggleToAppoWeek(ActionEvent event) {
-
-    }
-
+    /**
+     * Switches to the customer table screen.
+     */
     @FXML
     public void toggleToCustomer(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
@@ -207,6 +219,9 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of appointments by month and type screen.
+     */
     @FXML
     public void toggleToReports1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
@@ -217,6 +232,9 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of appointments by contacts screen.
+     */
     @FXML
     public void toggleToReports2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));
@@ -227,6 +245,9 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of customers by country and division screen.
+     */
     @FXML
     public void toggleToReports3(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Report3.fxml"));
@@ -237,26 +258,24 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the add appointment screen.
+     */
     @FXML
-    public void toggleToReports(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 600, 400);
-        //stage.setTitle("From appointment menu to update appointment");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void addAppointment(ActionEvent actionEvent) throws IOException {
+    public void addAppointment(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 695, 430);
         //stage.setTitle("From appointment menu to add appointment");
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Switches to the update appointment screen.
+     * When this action is taken, the passAppointment static method is called and it passes the selected appointment.
+     * If nothing is selected, a message is displayed saying nothing was selected and nothing happens.
+     */
     @FXML
     public void updateAppointment(ActionEvent event) throws IOException {
         Appointment SA = appointmentTable.getSelectionModel().getSelectedItem();
@@ -275,6 +294,10 @@ public class AppointmentBWController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Allows the user to logout when clicked.
+     * This returns to the login screen.
+     */
     @FXML
     public void logout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");

@@ -26,13 +26,10 @@ import util.DBUsers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.time.*;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -177,8 +174,6 @@ public class UpdateAppointmentController implements Initializable {
 
     /**
      * Cancels the modification of the appointment when Cancel is clicked.
-     * @param event not used
-     * @throws IOException
      */
     @FXML
     public void cancelModifyAppointment(ActionEvent event) throws IOException {
@@ -194,8 +189,6 @@ public class UpdateAppointmentController implements Initializable {
      * Saves the modified appointment when Save is clicked.
      * The modified appointment instance is put into the database without an altered duplication.
      * Uses other methods to ensure the data being saved is valid, sends an alert indicating if otherwise.
-     * @param event no use
-     * @throws IOException
      */
     @FXML
     public void saveModifyAppointment(ActionEvent event) throws IOException {

@@ -36,12 +36,6 @@ public class AddCustomerController implements Initializable {
     private TextField address;
 
     /**
-     * TextField for the customer ID. It is auto-generated in the database so it is not editable and is not accessed.
-     */
-    @FXML
-    private TextField customerID;
-
-    /**
      * TextField for inputting the customer name.
      */
     @FXML
@@ -78,8 +72,6 @@ public class AddCustomerController implements Initializable {
 
     /**
      * Cancels the customer being added using the Cancel button.
-     * @param event
-     * @throws IOException
      */
     @FXML
     public void cancelAddCustomer(ActionEvent event) throws IOException {
@@ -95,8 +87,6 @@ public class AddCustomerController implements Initializable {
      * Saves the customer being added when the Save button is clicked.
      * All customer instances are put into the database.
      * Has a conditional statement that prevents any empty fields from being saved.
-     * @param event
-     * @throws IOException
      */
     @FXML
     public void saveAddCustomer(ActionEvent event) throws IOException {
@@ -122,8 +112,6 @@ public class AddCustomerController implements Initializable {
 
     /**
      * Used to fill and set the country combobox with all of the countries from the database.
-     * @param url
-     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -137,7 +125,6 @@ public class AddCustomerController implements Initializable {
      * Fills and sets the division combobox given the selection of the country from the user.
      * There are conditional statements that check the country selected and sets the division combobox
      * with the respective divisions for the country.
-     * @param event
      */
     @FXML
     public void onComboSelectCountry(ActionEvent event) {
@@ -177,16 +164,6 @@ public class AddCustomerController implements Initializable {
             }
             divisionComboBox.setItems(divisionFiltered);
         }
-
-    }
-
-    /**
-     * No use. Should delete probably
-     * @param event
-     */
-    @FXML
-    public void onComboSelectDivision(ActionEvent event) {
-
     }
 
 }

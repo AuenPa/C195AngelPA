@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,34 +33,65 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/**
+ * This class is responsible for login functions and is the initial screen when the program starts.
+ */
 public class UserController implements Initializable {
 
+    /**
+     * TextField for taking the password.
+     */
     @FXML
     private TextField passWord;
 
+    /**
+     * TextField for taking the username.
+     */
     @FXML
     private TextField userName;
 
+    /**
+     * Label for displaying the locale.
+     */
     @FXML
     private Label localZone;
 
+    /**
+     * Button used to login when clicked.
+     */
     @FXML
     private Button loginButtonLabel;
 
+    /**
+     * Label that says password.
+     */
     @FXML
     private Label passwordLabel;
 
+    /**
+     * Title label.
+     */
     @FXML
     private Label titleLabel;
 
+    /**
+     * Username label.
+     */
     @FXML
     private Label usernameLabel;
 
-    private ObservableList<Appointment> listOfAppointmentsToday = FXCollections.observableArrayList();
-
+    /**
+     * ResourceBundle used to retrieve the key-value pair information that is required for the translation to french.
+     */
     private ResourceBundle rb = ResourceBundle.getBundle("util/Lang_fr", Locale.getDefault());
 
 
+    /**
+     * This method allows the user to login when the valid credentials are provided.
+     * Along with allowing the user to login, it also checks if there is an appointment within 15 minutes of the login.
+     * It also records the user login attempts and sends that information to a text file.
+     * When the users language setting is set to french, it defaults any relevant text in the login screen to french. Specifically all pop-up messages that may appear.
+     */
     @FXML
     public void loginToAppointments(ActionEvent event) throws IOException {
 
@@ -156,6 +186,9 @@ public class UserController implements Initializable {
     }
 
 
+    /**
+     * Sets and displays the system locale as well as setting labels to french if the system language is set to french.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId localZoneID = ZoneId.of(TimeZone.getDefault().getID());

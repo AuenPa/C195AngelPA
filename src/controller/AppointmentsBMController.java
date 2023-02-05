@@ -24,56 +24,90 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentsBMController implements Initializable {
-    @FXML
-    private RadioButton allAppointmentRB;
 
-    @FXML
-    private RadioButton appointmentMonthRB;
-
-    @FXML
-    private RadioButton appointmentWeekRB;
-
-    @FXML
-    private RadioButton customerRB;
-
+    /**
+     * TableColumn for the appointment ID.
+     */
     @FXML
     private TableColumn<Appointment, Integer> appointmentIdCol;
 
+    /**
+     * TableColumn for the descriptions.
+     */
     @FXML
     private TableColumn<Appointment, String> descriptionCol;
 
+    /**
+     * TableView for the appointments.
+     */
     @FXML
     private TableView<Appointment> appointmentTable;
 
+    /**
+     * TableColumn for the contact names.
+     */
     @FXML
     private TableColumn<Appointment, Integer> contactNameCol;
 
+    /**
+     * TableColumn for the customer ID.
+     */
     @FXML
     private TableColumn<Appointment, Integer> customerIdCol;
 
+    /**
+     * TableColumn for the end times.
+     */
     @FXML
     private TableColumn<Appointment, LocalTime> endTimeCol;
 
+    /**
+     * TableColumn for the locations.
+     */
     @FXML
     private TableColumn<Appointment, String> locationCol;
 
+    /**
+     * TableColumn for the start date.
+     */
     @FXML
     private TableColumn<Appointment, LocalDate> startDateCol;
 
+    /**
+     * TableColumn for the start times.
+     */
     @FXML
     private TableColumn<Appointment, LocalTime> startTimeCol;
 
+    /**
+     * TableColumn for the titles.
+     */
     @FXML
     private TableColumn<Appointment, String> titleCol;
 
+    /**
+     * TableColumn for the type.
+     */
     @FXML
     private TableColumn<Appointment, String> typeCol;
 
+    /**
+     * TableColumn for the user ID.
+     */
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
 
+    /**
+     * The appointment instance that is selected to be deleted.
+     */
     private Appointment SA;
 
+    /**
+     * Deletes the appointment from the table as well as from the database.
+     * The selected appointment is deleted but not before an alert is shown asking if this is what the user wants done.
+     * If the appointment is chosen for deletion, another alert is shown right after informing the details of the appointment that was deleted.
+     * If the delete button is clicked when no appointment is selected, there is an error alert stating that nothing was selected to delete.
+     */
     @FXML
     public void deleteAppointment(ActionEvent event) {
         try {
@@ -97,12 +131,10 @@ public class AppointmentsBMController implements Initializable {
             }
             e.printStackTrace();
         }
-        //appointmentTable.setItems(DBAppointments.getAllAppointments());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //appointmentTable.setItems(DBAppointments.getAllAppointments());
         ObservableList<Appointment> filterAppsByMonthList = FXCollections.observableArrayList();
         for(Appointment a : DBAppointments.getAllAppointments()) {
             if(a.getStartDate().getMonth() == LocalDate.now().getMonth() &&
@@ -124,12 +156,11 @@ public class AppointmentsBMController implements Initializable {
         endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTimeT"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("assocCustomerId"));
-
-
-        //appointmentMonthRB.setSelected(true);
-        //allAppointmentRB.setSelected(false);
     }
 
+    /**
+     * Switches to the all appointments screen.
+     */
     @FXML
     public void toggleToAllAppo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
@@ -140,11 +171,9 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    public void toggleToAppoMonth(ActionEvent event) {
-
-    }
-
+    /**
+     * Switches to appointments by week screen.
+     */
     @FXML
     public void toggleToAppoWeek(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
@@ -155,6 +184,9 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the customer table screen.
+     */
     @FXML
     public void toggleToCustomer(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
@@ -165,16 +197,9 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    public void toggleToReports(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 600, 400);
-        //stage.setTitle("From appointment menu to update appointment");
-        stage.setScene(scene);
-        stage.show();
-    }
-
+    /**
+     * Switches to the report of appointments by month and type screen.
+     */
     @FXML
     public void toggleToReports1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
@@ -185,6 +210,9 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of appointments by contacts screen.
+     */
     @FXML
     public void toggleToReports2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));
@@ -195,6 +223,9 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of customers by country and division screen.
+     */
     @FXML
     public void toggleToReports3(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Report3.fxml"));
@@ -205,16 +236,24 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the add appointment screen.
+     */
     @FXML
-    public void addAppointment(ActionEvent actionEvent) throws IOException {
+    public void addAppointment(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 695, 430);
         //stage.setTitle("From appointment menu to add appointment");
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Switches to the update appointment screen.
+     * When this action is taken, the passAppointment static method is called and it passes the selected appointment.
+     * If nothing is selected, a message is displayed saying nothing was selected and nothing happens.
+     */
     @FXML
     public void updateAppointment(ActionEvent event) throws IOException {
         Appointment SA = appointmentTable.getSelectionModel().getSelectedItem();
@@ -233,6 +272,10 @@ public class AppointmentsBMController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Allows the user to logout when clicked.
+     * This returns to the login screen.
+     */
     @FXML
     public void logout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");

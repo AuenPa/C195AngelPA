@@ -1,7 +1,5 @@
 package controller;
 
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +21,6 @@ import util.DBCustomers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -56,6 +53,13 @@ public class CustomerController implements Initializable {
 
     private Customer SC;
 
+    /**
+     * Deletes the selected customer.
+     * If the customer has any appointments, this process will not succeed.
+     * Only when all appointments associated with this customer are deleted will the customer finally be able to be deleted.
+     * An alert stating there was an error will display if there are appointments associated with the customer.
+     * If no customer is selected an error will pop-up stating that nothing was selected and nothing will be done.
+     */
     @FXML
     public void deleteSelectedCustomer(ActionEvent event) {
 
@@ -96,10 +100,12 @@ public class CustomerController implements Initializable {
                 alert1.showAndWait();
             }
             e.printStackTrace();
-            //System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Switches to the add customer screen.
+     */
     @FXML
     public void toAddCustomerScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
@@ -111,6 +117,11 @@ public class CustomerController implements Initializable {
 
     }
 
+    /**
+     * Switches to the update customer screen.
+     * When this action is taken, the passCustomer static method is called and it passes the selected customer.
+     * If nothing is selected, a message is displayed saying nothing was selected and nothing happens.
+     */
     @FXML
     public void toUpdateCustomerScreen(ActionEvent event) throws IOException {
         Customer SC = customerTable.getSelectionModel().getSelectedItem();
@@ -129,6 +140,10 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Allows the user to logout when clicked.
+     * This returns to the login screen.
+     */
     @FXML
     public void logout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");
@@ -145,9 +160,11 @@ public class CustomerController implements Initializable {
         }
     }
 
+    /**
+     * Sets the customer table with all of the customers in the database.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //customerTable.setItems(Customer.getAllCustomersCM());
         customerTable.setItems(DBCustomers.getAllCustomers());
 
         tableColumn1.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -160,6 +177,9 @@ public class CustomerController implements Initializable {
 
     }
 
+    /**
+     * Switches to the all appointments screen.
+     */
     @FXML
     public void toggleToAllApps(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
@@ -170,6 +190,9 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to appointments by month screen.
+     */
     @FXML
     public void toggleToAppMonth(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
@@ -180,6 +203,9 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to appointments by week screen.
+     */
     @FXML
     public void toggleToAppWeek(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
@@ -190,6 +216,10 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the reports screen.
+     * The reports on number of appointments by month and type is shown by default.
+     */
     @FXML
     public void toggleToReports(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));

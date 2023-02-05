@@ -103,8 +103,6 @@ public class UpdateCustomerController implements Initializable {
      * Populates the textfields and comboboxes with the appropriate data from the customer instance
      * that is passed.
      * Sets the comboboxes for the country and divisions to be selected.
-     * @param url
-     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -177,8 +175,6 @@ public class UpdateCustomerController implements Initializable {
      * Saves the customer being modified when the Save button is clicked.
      * All customer changes are updated in the database.
      * Has a conditional statement that prevents any empty fields from being saved.
-     * @param event
-     * @throws IOException
      */
     @FXML
     public void saveUpdateCustomer(ActionEvent event) throws IOException {
@@ -202,8 +198,6 @@ public class UpdateCustomerController implements Initializable {
 
     /**
      * Cancels the customer being modified using the Cancel button.
-     * @param event
-     * @throws IOException
      */
     @FXML
     public void cancelUpdateCustomer(ActionEvent event) throws IOException {
@@ -219,7 +213,6 @@ public class UpdateCustomerController implements Initializable {
      * Fills and sets the division combobox given the selection of the country from the user.
      * There are conditional statements that check the country selected and sets the division combobox
      * with the respective divisions for the country.
-     * @param event
      */
     @FXML
     public void onComboSelectCountry(ActionEvent event) {
@@ -261,12 +254,4 @@ public class UpdateCustomerController implements Initializable {
         }
     }
 
-    /**
-     * No use. Should delete probably
-     * @param event
-     */
-    @FXML
-    public void onComboSelectState(ActionEvent event) {
-
-    }
 }
