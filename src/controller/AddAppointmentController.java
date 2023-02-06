@@ -154,11 +154,11 @@ public class AddAppointmentController implements Initializable {
      * Saves the appointment when Save is clicked.
      * All appointment instances are put into the database.
      * Uses other methods to ensure the data being saved is valid, sends an alert indicating if otherwise.
-     * <p>
+     * <p><b>
      * The lambda expression, contactCheck, is used to check if the contact name selected in the
      * contact name ComboBox is equal to a contact in the database. The ID of the contact is stored
      * when the names match and is used as an attribute to be stored in the new instance.
-     * </p>
+     * </b></p>
      */
     @FXML
     public void saveAddAppointment(ActionEvent event) throws IOException {

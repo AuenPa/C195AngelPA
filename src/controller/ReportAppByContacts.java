@@ -24,10 +24,10 @@ import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Responsible for displaying the appointments that pertain to a specific customer.
+ */
 public class ReportAppByContacts implements Initializable {
-
-    @FXML
-    private RadioButton allAppointmentRB;
 
     @FXML
     private TableColumn<Appointment, Integer> appointmentIdCol;
@@ -39,9 +39,6 @@ public class ReportAppByContacts implements Initializable {
     private TableView<Appointment> appointmentTable;
 
     @FXML
-    private RadioButton appointmentWeekRB;
-
-    @FXML
     private ComboBox<String> contactComboBox;
 
     @FXML
@@ -51,9 +48,6 @@ public class ReportAppByContacts implements Initializable {
     private TableColumn<Appointment, Integer> customerIdCol;
 
     @FXML
-    private RadioButton customerRB;
-
-    @FXML
     private TableColumn<Appointment, String> descriptionCol;
 
     @FXML
@@ -61,15 +55,6 @@ public class ReportAppByContacts implements Initializable {
 
     @FXML
     private TableColumn<Appointment, String> locationCol;
-
-    @FXML
-    private RadioButton reportsRB1;
-
-    @FXML
-    private RadioButton reportsRB2;
-
-    @FXML
-    private RadioButton reportsRB3;
 
     @FXML
     private TableColumn<Appointment, LocalDate> startDateCol;
@@ -86,6 +71,10 @@ public class ReportAppByContacts implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
 
+    /**
+     * Allows the user to logout when clicked.
+     * This returns to the login screen.
+     */
     @FXML
     public void logout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Logout?");
@@ -102,6 +91,9 @@ public class ReportAppByContacts implements Initializable {
         }
     }
 
+    /**
+     * Switches to the all appointments screen.
+     */
     @FXML
     public void toggleToAllAppo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
@@ -112,6 +104,9 @@ public class ReportAppByContacts implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to appointments by month screen.
+     */
     @FXML
     public void toggleToAppoMonth(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsByMonth.fxml"));
@@ -122,6 +117,9 @@ public class ReportAppByContacts implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to appointments by week screen.
+     */
     @FXML
     public void toggleToAppoWeek(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentByWeek.fxml"));
@@ -132,6 +130,9 @@ public class ReportAppByContacts implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the customer table screen.
+     */
     @FXML
     public void toggleToCustomer(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApplicationMenu.fxml"));
@@ -142,6 +143,9 @@ public class ReportAppByContacts implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of appointments by month and type screen.
+     */
     @FXML
     public void toggleToReports1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
@@ -152,11 +156,9 @@ public class ReportAppByContacts implements Initializable {
         stage.show();
     }
 
-    @FXML
-    public void toggleToReports2(ActionEvent event) {
-
-    }
-
+    /**
+     * Switches to the report of customers by country and division screen.
+     */
     @FXML
     public void toggleToReports3(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Report3.fxml"));
@@ -167,6 +169,10 @@ public class ReportAppByContacts implements Initializable {
         stage.show();
     }
 
+    /**
+     * Filters through the appointments that have the contact name selected by the user.
+     * Sets the appointments in the table.
+     */
     @FXML
     public void searchForAppointments(ActionEvent event) {
 
@@ -205,6 +211,10 @@ public class ReportAppByContacts implements Initializable {
     }
  */
 
+    /**
+     * Populates the contact ComboBox with the contacts from the database.
+     * Primes the table to be populated with the correct values.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> contactNames = FXCollections.observableArrayList();

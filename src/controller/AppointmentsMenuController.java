@@ -21,6 +21,9 @@ import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for displaying all appointments. All functions that encompass working with appointments are available.
+ */
 public class AppointmentsMenuController implements Initializable {
 
     /**

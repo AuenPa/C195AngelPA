@@ -1,8 +1,5 @@
 package controller;
 
-import com.mysql.cj.result.StringValueFactory;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,45 +10,48 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Appointment;
 import util.DBAppointments;
 
-import javax.naming.spi.InitialContextFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * Responsible for displaying the number of appointments that match the month and type given.
+ */
 public class ReportByMonthType implements Initializable {
 
+    /**
+     * Label used to display the number of appointments matching the criteria given.
+     */
     @FXML
     private Label numberOfAppointmentsLabel;
 
+    /**
+     * ComboBox used to select the month.
+     */
     @FXML
     private ComboBox<Month> monthCB;
 
-    @FXML
-    private TableColumn<Appointment, String> monthColRep;
-
-    @FXML
-    private TableColumn<Appointment, Integer> numOfAppsCol;
-
-    @FXML
-    private TableView<Appointment> report1Table;
-
+    /**
+     * TextField used to enter the type of the appointment.
+     */
     @FXML
     private TextField searchTypeTF;
 
-    @FXML
-    private TableColumn<Appointment, String> typeColRep;
-
+    /**
+     * Used to hold the number of appointments that match the criteria.
+     */
     private int counter = 0;
 
 
+    /**
+     * Sets the month ComboBox with all of the months of the year.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Month> monthList = FXCollections.observableArrayList();
@@ -59,11 +59,9 @@ public class ReportByMonthType implements Initializable {
         monthCB.setItems(monthList);
     }
 
-    @FXML
-    public void getTypeSearched(ActionEvent event) {
-
-    }
-
+    /**
+     * Switches to the all appointments table.
+     */
     @FXML
     public void returnToAppointments(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../view/AppointmentsMenu.fxml"));
@@ -74,11 +72,10 @@ public class ReportByMonthType implements Initializable {
         stage.show();
     }
 
-    @FXML
-    public void getMonthSelect(ActionEvent event) {
-
-    }
-
+    /**
+     * Counts up the number of appointments that match the month and type selected from the ComboBox.
+     * The sum is then displayed on a label.
+     */
     @FXML
     public void lookUpAppointments(ActionEvent event) {
         counter = 0;
@@ -90,6 +87,9 @@ public class ReportByMonthType implements Initializable {
         numberOfAppointmentsLabel.setText(String.valueOf(counter));
     }
 
+    /**
+     * Switches to the report of appointments by contacts screen.
+     */
     @FXML
     public void toggleToReports2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));
@@ -100,6 +100,9 @@ public class ReportByMonthType implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of customers by country and division screen.
+     */
     @FXML
     public void toggleToReports3(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Report3.fxml"));

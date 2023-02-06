@@ -1,6 +1,5 @@
 package main;
 
-import util.DBCustomers;
 import util.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +8,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
+/**
+ * Responsible for setting the initial stage and creating a connection to the database.
+ * Also closes the connection when closing the program.
+ */
 public class Main extends Application {
 
     @Override

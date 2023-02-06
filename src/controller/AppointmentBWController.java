@@ -27,6 +27,9 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for displaying all appointments within the same current week of the year. All functions that encompass working with appointments are available.
+ */
 public class AppointmentBWController implements Initializable {
 
     /**
@@ -141,6 +144,10 @@ public class AppointmentBWController implements Initializable {
      * Filters through the appointments by the week of the year as well as setting those appointments on the table.
      * Using the WeekFields class, the appointments are filtered by current week of the year.
      * This produces a list of appointments that are within the current week which are then set on the table.
+     * <p><b>
+     *     The lambda expression, compareMonth, is used to to compare the current month with the months of the appointments in the database.
+     *     If the appointment is equal to the current month, it is added to a list and is displayed in the table.
+     * </b></p>
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -23,6 +23,9 @@ import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for displaying all appointments within the same current month of the year. All functions that encompass working with appointments are available.
+ */
 public class AppointmentsBMController implements Initializable {
 
     /**

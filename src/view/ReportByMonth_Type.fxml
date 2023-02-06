@@ -11,8 +11,8 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportByMonthType">
    <children>
       <Label layoutX="209.0" layoutY="39.0" text="Appointments by Month and Type" />
-      <ComboBox fx:id="monthCB" layoutX="84.0" layoutY="81.0" onAction="#getMonthSelect" prefWidth="150.0" />
-      <TextField fx:id="searchTypeTF" layoutX="288.0" layoutY="81.0" onAction="#getTypeSearched" />
+      <ComboBox fx:id="monthCB" layoutX="84.0" layoutY="81.0" prefWidth="150.0" />
+      <TextField fx:id="searchTypeTF" layoutX="288.0" layoutY="81.0" />
       <Label layoutX="38.0" layoutY="85.0" text="Month:" />
       <Label layoutX="253.0" layoutY="85.0" text="Type:" />
       <Button layoutX="473.0" layoutY="349.0" mnemonicParsing="false" onAction="#returnToAppointments" text="Appointments" />

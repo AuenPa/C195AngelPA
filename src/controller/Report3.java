@@ -23,22 +23,42 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for displaying the number of customer from a certain country and division.
+ */
 public class Report3 implements Initializable {
 
+    /**
+     * ComboBox used to select the division.
+     */
     @FXML
     private ComboBox<Division> DivisionCB;
 
+    /**
+     * ComboBox used to select the country.
+     */
     @FXML
     private ComboBox<Country> countryCB;
 
+    /**
+     * Label used to display the number of customer from the same division.
+     */
     @FXML
     private Label numberOfCustomersLabel;
 
+    /**
+     * Used to hold the divisions that match the country selected.
+     */
     private ObservableList<Division> divisionFiltered = FXCollections.observableArrayList();
 
+    /**
+     * Holds the number of customers that match the given criteria.
+     */
     private int counter = 0;
 
-
+    /**
+     * Sets the country combobox with the countries in the database for user selection.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -46,6 +66,9 @@ public class Report3 implements Initializable {
         countryCB.setItems(countries);
     }
 
+    /**
+     * Sets the division combobox given the selection of the country from the user.
+     */
     @FXML
     public void getCountrySelect(ActionEvent event) {
 
@@ -86,6 +109,10 @@ public class Report3 implements Initializable {
         }
     }
 
+    /**
+     * Counts the number of customers from the same division and sums them all up.
+     * It then displays the number of customers that match the same division.
+     */
     @FXML
     public void getDivisionSelect(ActionEvent event) {
         try {
@@ -102,6 +129,9 @@ public class Report3 implements Initializable {
         }
     }
 
+    /**
+     * Switches to the all appointments table.
+     */
     @FXML
     public void returnToAppointments(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentsMenu.fxml"));
@@ -112,6 +142,9 @@ public class Report3 implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of appointments by month and type screen.
+     */
     @FXML
     public void toggleToReports1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportByMonth_Type.fxml"));
@@ -122,6 +155,9 @@ public class Report3 implements Initializable {
         stage.show();
     }
 
+    /**
+     * Switches to the report of appointments by contacts screen.
+     */
     @FXML
     public void toggleToReports2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportAppByContacts.fxml"));

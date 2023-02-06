@@ -24,6 +24,9 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for displaying all customers in a table and providing all functions to work on those customers.
+ */
 public class CustomerController implements Initializable {
 
 

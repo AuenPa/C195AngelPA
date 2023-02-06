@@ -31,7 +31,7 @@
         <RadioButton fx:id="customerRB" layoutX="587.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToCustomer" text="Customers" />
         <RadioButton fx:id="allAppointmentRB" layoutX="104.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToAllAppo" text="All Appointments" />
         <Button layoutX="600.0" layoutY="488.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
-        <RadioButton fx:id="reportsRB2" layoutX="798.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports2" selected="true" text="Report 2" />
+        <RadioButton fx:id="reportsRB2" layoutX="798.0" layoutY="66.0" mnemonicParsing="false" selected="true" text="Report 2" />
       <RadioButton fx:id="reportsRB3" layoutX="901.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports3" text="Report 3" />
       <RadioButton fx:id="reportsRB1" layoutX="694.0" layoutY="66.0" mnemonicParsing="false" onAction="#toggleToReports1" text="Report 1" />
       <ComboBox fx:id="contactComboBox" layoutX="150.0" layoutY="108.0" onAction="#searchForAppointments" prefWidth="150.0" />
