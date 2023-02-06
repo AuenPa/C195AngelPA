@@ -9,11 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Responsible for adding, updating, deleting, and retrieving all of the customers from the database.
+ */
 public class DBCustomers {
 
-    //private static ObservableList<Customer> clist = FXCollections.observableArrayList();
-
-
+    /**
+     * Gets all of the customers from the database.
+     * @return the ObservableList of all customers
+     */
     public static ObservableList<Customer> getAllCustomers() {
         ObservableList<Customer> clist = FXCollections.observableArrayList();
 
@@ -42,22 +46,26 @@ public class DBCustomers {
 
     }
 
+    /**
+     * Deletes the selected customer from the database.
+     * @param customerId the customer ID to set
+     * @throws SQLException
+     */
     public static void deleteCustomer(int customerId) throws SQLException {
-        /*
-        for(Customer SC : getAllCustomers()) {
-            if(SC.getCustomerId() == customerId) {
-                getAllCustomers().remove(SC);
-            }
-        }
-         */
-        //going to have to make a public static *final* observable array list to hold what is retrieved from the database using the
-        //DBCustomers.getAllcustomers() method. use this list to populate the table
         String sql = "DELETE from customers WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setInt(1, customerId);
         ps.executeUpdate();
     }
 
+    /**
+     * Adds the customer to the database from the newly created instance of customer.
+     * @param customerName the customer name to set
+     * @param address the customer address to set
+     * @param postalCode the customer postal code to set
+     * @param phoneNum the customer phone number to set
+     * @param divisionId the customer division ID to set
+     */
     public static void addCustomer(String customerName, String address, String postalCode, String phoneNum, int divisionId) {
         try {
             String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
@@ -74,6 +82,15 @@ public class DBCustomers {
         }
     }
 
+    /**
+     * Updates the selected customer in the database.
+     * @param customerId the customer ID to set
+     * @param customerName the customer name to set
+     * @param address the customer address to set
+     * @param postalCode the customer postal code to set
+     * @param phoneNum the customer phone number to set
+     * @param divisionId the customer division ID to set
+     */
     public static void updateCustomer(int customerId, String customerName, String address, String postalCode, String phoneNum, int divisionId) {
 
         try{

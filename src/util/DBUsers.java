@@ -8,8 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Responsible for getting all users.
+ */
 public class DBUsers {
 
+    /**
+     * Gets all users from the database.
+     * @return the ObservableList of all users
+     */
     public static ObservableList<User> getAllUsers() {
         ObservableList<User> ulist = FXCollections.observableArrayList();
 

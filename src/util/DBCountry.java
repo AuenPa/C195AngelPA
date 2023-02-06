@@ -8,8 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Responsible for getting all of the countries.
+ */
 public class DBCountry {
 
+    /**
+     * Gets all of the countries from the database.
+     * @return the ObservableList of all countries
+     */
     public static ObservableList<Country> getAllCountries() {
         ObservableList<Country> clist = FXCollections.observableArrayList();
 

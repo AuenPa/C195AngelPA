@@ -3,7 +3,6 @@ package util;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
-import model.Customer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +12,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Responsible for adding, deleting, updating, and retrieving the appointment data from the database.
+ */
 public class DBAppointments {
 
+    /**
+     * Retrieves all appointments from the database and creates a new instance of appointment
+     * @return the ObservableList of all appointments from the database
+     */
     public static ObservableList<Appointment> getAllAppointments() {
         ObservableList<Appointment> alist = FXCollections.observableArrayList();
         try {
@@ -57,6 +63,18 @@ public class DBAppointments {
 
     }
 
+    /**
+     * Adds the appointment to the database.
+     * @param title the title to set
+     * @param description the description to set
+     * @param location the location to set
+     * @param type the type to set
+     * @param startT the start time to set
+     * @param endT the end time to set
+     * @param assocCustId the associated customer ID to set
+     * @param contactId the contact ID to set
+     * @param userId the user ID to set
+     */
     public static void addAppointment(String title, String description, String location, String type, Timestamp startT, Timestamp endT, int assocCustId, int contactId, int userId) {
         try {
             String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -76,6 +94,20 @@ public class DBAppointments {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Updates the appointment in the database.
+     * @param appointmentId the appointment ID to set
+     * @param title the title to set
+     * @param description the description to set
+     * @param location the location to set
+     * @param type the type to set
+     * @param startT the start time to set
+     * @param endT the end time to set
+     * @param assocCustId the associated customer id to set
+     * @param contactId the contact ID to set
+     * @param userId the user ID to set
+     */
     public static void updateAppointment(int appointmentId, String title, String description, String location, String type, Timestamp startT, Timestamp endT, int assocCustId, int contactId, int userId) {
         try {
             String sql = "UPDATE appointments set Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, Contact_ID = ?, User_ID = ? WHERE Appointment_ID = ?";
@@ -97,6 +129,11 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * Deletes the appointment from the database.
+     * @param appointmentId the appointment ID to set
+     * @throws SQLException
+     */
     public static void deleteAppointment(int appointmentId) throws SQLException {
         String sql = "DELETE from appointments WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

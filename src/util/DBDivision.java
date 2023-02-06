@@ -8,8 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Responsible for getting all divisions.
+ */
 public class DBDivision {
 
+    /**
+     * Gets all divisions from the database.
+     * @return the ObservableList of all divisions
+     */
     public static ObservableList<Division> getAllDivisions() {
         ObservableList<Division> slist = FXCollections.observableArrayList();
 
