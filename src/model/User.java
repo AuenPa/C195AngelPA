@@ -4,10 +4,25 @@ package model;
  * Represents a user.
  */
 public class User {
+    /**
+     * The user ID variable of a User object
+     */
     private int userId;
+    /**
+     * The username variable of a User object
+     */
     private String userName;
+    /**
+     * The password variable of a User object
+     */
     private String password;
 
+    /**
+     * Constructor of a User object.
+     * @param userId user ID to set
+     * @param userName username to set
+     * @param password password to set
+     */
     public User(int userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;

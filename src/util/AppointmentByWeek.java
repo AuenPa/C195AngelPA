@@ -3,7 +3,7 @@ package util;
 import java.time.Month;
 
 /**
- * The lambda expression uses this as its method
+ * The lambda expression in the 'appointment by week' controller uses this interface.
  */
 public interface AppointmentByWeek {
     /**

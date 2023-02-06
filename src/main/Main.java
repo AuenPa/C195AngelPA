@@ -15,6 +15,11 @@ import java.sql.SQLException;
  */
 public class Main extends Application {
 
+    /**
+     * Sets initial stage.
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
@@ -24,6 +29,11 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Makes the connection and closes it when program is closed.
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
 
         //Locale.setDefault(new Locale("fr"));

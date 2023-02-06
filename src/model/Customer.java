@@ -8,14 +8,45 @@ import util.DBCustomers;
  * Represents a customer.
  */
 public class Customer {
+    /**
+     * The customer ID variable of a Customer object
+     */
     private int customerId;
+    /**
+     * The customer name variable of a Customer object
+     */
     private String customerName;
+    /**
+     * The customer address variable of a Customer object
+     */
     private String address;
+    /**
+     * The customer postal code variable of a Customer object
+     */
     private String postalCode;
+    /**
+     * The customer phone number variable of a Customer object
+     */
     private String phoneNumber;
+    /**
+     * The customer division ID variable of a Customer object
+     */
     private int divisionId;
+    /**
+     * The customer Division of a Customer object
+     */
     private String division;
 
+    /**
+     * Constructor of a Customer object.
+     * @param customerId the customer ID to set
+     * @param customerName the customer name to set
+     * @param address the address to set
+     * @param postalCode the postal code to set
+     * @param phoneNumber the phone number to set
+     * @param divisionId the division ID to set
+     * @param division the division to set
+     */
     public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber, int divisionId, String division) {
         this.customerId = customerId;
         this.customerName = customerName;

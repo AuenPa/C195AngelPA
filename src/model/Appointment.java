@@ -8,19 +8,70 @@ import java.time.LocalTime;
  */
 public class Appointment {
 
+    /**
+     * The appointment ID variable of an Appointment object
+     */
     private int appointmentId;
+    /**
+     * The appointment title variable of an Appointment object
+     */
     private String title;
+    /**
+     * The appointment description of an Appointment object
+     */
     private String description;
+    /**
+     * The appointment location of an Appointment object
+     */
     private String location;
+    /**
+     * The appointment type of an Appointment object
+     */
     private String type;
+    /**
+     * The appointment start date of an Appointment object
+     */
     private LocalDate startDate;
+    /**
+     * The appointment start time of an Appointment object
+     */
     private LocalTime startTimeT;
+    /**
+     * The appointment end date of an Appointment object
+     */
     private LocalDate endDate;
+    /**
+     * The appointment end time of an Appointment object
+     */
     private LocalTime endTimeT;
+    /**
+     * The appointment customer ID of an Appointment object
+     */
     private int assocCustomerId;
+    /**
+     * The appointment contact name of an Appointment object
+     */
     private String contactName;
+    /**
+     * The appointment user ID of an Appointment object
+     */
     private int userId;
 
+    /**
+     * Constructor for an Appointment object.
+     * @param appointmentId the appointment ID to set
+     * @param title the title to set
+     * @param description the description to set
+     * @param location the location to set
+     * @param type the type to set
+     * @param startTimeT the start time to set
+     * @param endTimeT the end time to set
+     * @param assocCustomerId the associated customer ID to set
+     * @param contactName the contact name to set
+     * @param userId the user ID to set
+     * @param startDate the start date to set
+     * @param endDate the end date to set
+     */
     public Appointment(int appointmentId, String title, String description, String location, String type, LocalTime startTimeT, LocalTime endTimeT, int assocCustomerId, String contactName, int userId, LocalDate startDate, LocalDate endDate) {
         this.appointmentId = appointmentId;
         this.title = title;

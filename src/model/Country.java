@@ -5,9 +5,20 @@ package model;
  */
 public class Country {
 
+    /**
+     * The country ID variable of a Country object
+     */
     private int countryId;
+    /**
+     * The country name variable of a Country object
+     */
     private String country;
 
+    /**
+     * Constructor of a Country object.
+     * @param countryId the country ID to set
+     * @param country the country name to set
+     */
     public Country(int countryId, String country) {
         this.countryId = countryId;
         this.country = country;

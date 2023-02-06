@@ -9,14 +9,41 @@ import java.sql.SQLException;
  */
 public abstract class JDBC {
 
+    /**
+     * Protocol part of string jdbcUrl
+     */
     private static final String protocol = "jdbc";
+    /**
+     * Vendor part of string jdbcUrl
+     */
     private static final String vendor = ":mysql:";
+    /**
+     * Location part of string jdbcUrl
+     */
     private static final String location = "//localhost/";
+    /**
+     * Database name part of jdbcUrl
+     */
     private static final String databaseName = "client_schedule";
+    /**
+     * jdbcUrl used in the connection interface
+     */
     private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // LOCAL
+    /**
+     * used to locate driver
+     */
     private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
+    /**
+     * username used to login
+     */
     private static final String userName = "sqlUser"; // Username
+    /**
+     * password credential used to login
+     */
     private static String password = "Passw0rd!"; // Password
+    /**
+     * Connection object to get the connection
+     */
     public static Connection connection;  // Connection Interface
 
     /**

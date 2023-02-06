@@ -1,7 +1,7 @@
 package util;
 
 /**
- * The lambda expression uses this as its method.
+ * The lambda expression in the 'add appointment' controller uses this interface.
  */
 public interface AddAppointmentInterface {
 

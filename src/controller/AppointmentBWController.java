@@ -146,7 +146,9 @@ public class AppointmentBWController implements Initializable {
      * This produces a list of appointments that are within the current week which are then set on the table.
      * <p><b>
      *     The lambda expression, compareMonth, is used to to compare the current month with the months of the appointments in the database.
-     *     If the appointment is equal to the current month, it is added to a list and is displayed in the table.
+     *     If the appointment is equal to the current month, it is added to a list and is displayed in the table. The benefit of
+     *     this lambda expression is its potential for multi-purpose usage. It can be used to compare Month objects and return a
+     *     boolean.
      * </b></p>
      */
     @Override

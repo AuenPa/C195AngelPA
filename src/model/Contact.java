@@ -5,10 +5,25 @@ package model;
  */
 public class Contact {
 
+    /**
+     * The contact ID variable of a Contact object.
+     */
     private int contactId;
+    /**
+     * The contact name variable of a Contact object.
+     */
     private String contactName;
+    /**
+     * The contact email variable of a Contact object.
+     */
     private String email;
 
+    /**
+     * Constructor for a Contact object.
+     * @param contactId the contact ID to set
+     * @param contactName the contact name to set
+     * @param email the contact email to set
+     */
     public Contact(int contactId, String contactName, String email) {
         this.contactId = contactId;
         this.contactName = contactName;

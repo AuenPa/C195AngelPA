@@ -157,7 +157,10 @@ public class AddAppointmentController implements Initializable {
      * <p><b>
      * The lambda expression, contactCheck, is used to check if the contact name selected in the
      * contact name ComboBox is equal to a contact in the database. The ID of the contact is stored
-     * when the names match and is used as an attribute to be stored in the new instance.
+     * when the names match and is used as an attribute to be stored in the new instance. The usage of
+     * this lambda will abstract the process of checking if a string is equal to another string. The
+     * interface created can be used in other occasions which compare strings and return a boolean. The
+     * lambda expression in turn has multi-usage.
      * </b></p>
      */
     @FXML
